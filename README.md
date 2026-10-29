@@ -251,6 +251,13 @@ python scripts/seed_supabase.py
 TCS_INTERNAL_HACKATHON_DEVNEST/
 ├── README.md                               # Root project documentation (this file)
 ├── .gitignore                              # Root Git ignore rules
+├── mobile/                                 # Member 1 Faculty & Technician Mobile App (React Native)
+│   ├── README.md                           # Mobile app documentation
+│   ├── App.tsx                             # Application root
+│   ├── package.json                        # Node dependencies
+│   ├── android/                            # Native Android project
+│   ├── ios/                                # Native iOS project
+│   └── src/                                # Navigation, screens, components & services
 └── av-troubleshooter-ai/                   # Member 3 & 4 AI Backend Service
     ├── README.md                           # AI engine component documentation
     ├── requirements.txt                    # Python dependencies
