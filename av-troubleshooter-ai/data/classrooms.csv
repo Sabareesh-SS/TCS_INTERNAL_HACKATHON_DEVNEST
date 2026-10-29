@@ -1,0 +1,7 @@
+classroom_id,room_no,building,floor,classroom_qr_id,room_status
+CLS001,AB-204,Academic Block A,2,QR-CLS-AB204,ACTIVE
+CLS002,AB-105,Academic Block A,1,QR-CLS-AB105,ACTIVE
+CLS003,CB-301,Computer Block,3,QR-CLS-CB301,ACTIVE
+CLS004,EB-202,Engineering Block,2,QR-CLS-EB202,ACTIVE
+CLS005,LB-110,Library Block,1,QR-CLS-LB110,ACTIVE
+CLS006,AB-302,Academic Block A,3,QR-CLS-AB302,ACTIVE

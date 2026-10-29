@@ -1,0 +1,4 @@
+﻿model_name,dataset_split,number_of_samples,accuracy,precision_macro,recall_macro,f1_score_macro,evaluation_date
+RandomForestClassifier,TRAIN,180,1.0,1.0,1.0,1.0,2026-10-29
+RandomForestClassifier,VALIDATION,60,1.0,1.0,1.0,1.0,2026-10-29
+RandomForestClassifier,TEST,60,1.0,1.0,1.0,1.0,2026-10-29

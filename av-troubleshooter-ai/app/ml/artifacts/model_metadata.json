@@ -1,0 +1,13 @@
+{
+  "model_name": "SmartAVFaultClassifier (Naive Bayes & Softmax Hybrid)",
+  "train_samples": 180,
+  "val_samples": 60,
+  "test_samples": 60,
+  "evaluation_metrics": {
+    "validation_accuracy": 1.0,
+    "test_accuracy": 1.0,
+    "test_precision_macro": 1.0,
+    "test_recall_macro": 1.0,
+    "test_f1_macro": 1.0
+  }
+}
