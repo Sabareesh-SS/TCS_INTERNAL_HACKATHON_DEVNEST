@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { QRCodeSVG } from 'qrcode.react';
 import { qrService } from '../services/qrService';
-import { Download, Printer, RefreshCw, Shield, MapPin, ExternalLink } from 'lucide-react';
+import { Download, Printer, RefreshCw, MapPin, ExternalLink } from 'lucide-react';
 
 interface QRCodePreviewProps {
   type: 'classroom' | 'device';
@@ -154,25 +154,6 @@ export const QRCodePreview: React.FC<QRCodePreviewProps> = ({
             <span>AV DISPATCH: x4820</span>
           </div>
         </div>
-      </div>
-
-      {/* Security & Resolution Notice */}
-      <div className="rounded border border-zinc-200 bg-zinc-50 p-3.5 space-y-2 text-xs font-mono">
-        <div className="flex items-center justify-between text-zinc-700">
-          <span className="flex items-center gap-1.5 font-semibold">
-            <Shield className="w-4 h-4 text-emerald-600" />
-            Backend Resolution Target:
-          </span>
-          <span className="text-[11px] text-zinc-500 font-mono">
-            Scanned via Mobile Camera
-          </span>
-        </div>
-        <p className="text-zinc-600 break-all bg-white p-2 rounded border border-zinc-200">
-          {resolutionUrl}
-        </p>
-        <p className="text-[11px] text-zinc-500 font-sans">
-          The QR embeds an opaque UUID token. Scans resolve via Supabase RLS and never expose raw device configuration in static plaintext.
-        </p>
       </div>
     </div>
   );

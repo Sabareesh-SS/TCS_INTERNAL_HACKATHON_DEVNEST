@@ -8,7 +8,6 @@ import {
   Clock,
   Wrench,
   CheckCircle2,
-  Sparkles,
   ArrowRight,
   DoorClosed,
   Cpu,
@@ -45,20 +44,9 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
       {/* Top Banner / Welcome */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-5 rounded-lg border border-zinc-200 bg-white shadow-xs">
         <div>
-          <div className="flex items-center gap-2">
-            <span className="text-xs font-mono uppercase px-2 py-0.5 rounded bg-zinc-100 border border-zinc-200 text-zinc-700 font-semibold">
-              Administrator Operations Center
-            </span>
-            <span className="text-xs font-mono text-zinc-500">
-              Corpus ID: BIT-NAVIS-AV26
-            </span>
-          </div>
-          <h2 className="text-xl sm:text-2xl font-bold text-zinc-900 mt-1">
+          <h2 className="text-xl sm:text-2xl font-bold text-zinc-900">
             Welcome back, {currentUser.name}
           </h2>
-          <p className="text-xs sm:text-sm text-zinc-600 font-sans mt-0.5">
-            Campus-wide AV administration: monitor active classroom incidents, dispatch field technicians, and manage QR equipment registries.
-          </p>
         </div>
 
         <div className="flex items-center gap-2 shrink-0">
@@ -77,9 +65,6 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
           <h3 className="text-xs font-mono uppercase tracking-wider text-zinc-500 font-semibold">
             Campus AV Overview
           </h3>
-          <span className="text-[11px] font-mono text-zinc-500">
-            Realtime Supabase Sync
-          </span>
         </div>
 
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
@@ -122,35 +107,6 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
         </div>
       </div>
 
-      {/* AI Grounded Diagnostic Highlight Banner */}
-      <div className="p-4 rounded-lg border border-sky-200 bg-sky-50/70 flex flex-col md:flex-row md:items-center justify-between gap-4 shadow-xs">
-        <div className="flex items-start gap-3">
-          <div className="p-2 rounded bg-sky-100 border border-sky-200 text-sky-700 shrink-0">
-            <Sparkles className="w-4 h-4" />
-          </div>
-          <div>
-            <div className="flex items-center gap-2">
-              <h4 className="text-sm font-bold text-zinc-900">
-                AI Diagnostic Telemetry Engine (RAG Grounded)
-              </h4>
-              <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-white border border-sky-200 text-sky-800 font-bold">
-                94.6% Hypothesis Accuracy
-              </span>
-            </div>
-            <p className="text-xs text-zinc-700 mt-1 max-w-2xl font-sans leading-normal">
-              Incidents are automatically correlated against vendor service manuals (Crestron, Shure, Panasonic, Epson). Probable causes remain strictly flagged as hypotheses until technician field verification.
-            </p>
-          </div>
-        </div>
-
-        <button
-          onClick={() => onSelectIncident('INC-001')}
-          className="shrink-0 flex items-center gap-1.5 px-3 py-1.5 text-xs font-mono font-bold rounded bg-white hover:bg-sky-100 text-sky-800 border border-sky-300 transition-colors shadow-xs"
-        >
-          View Case INC-001 <ArrowRight className="w-3 h-3" />
-        </button>
-      </div>
-
       {/* Recent Incidents Table (Section 3) */}
       <div>
         <div className="flex items-center justify-between mb-3">
@@ -158,9 +114,6 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
             <h3 className="text-xs font-mono uppercase tracking-wider text-zinc-500 font-semibold">
               Recent Incidents
             </h3>
-            <p className="text-xs text-zinc-500">
-              Latest reports received from faculty mobile app and smart classroom telemetry
-            </p>
           </div>
 
           <button

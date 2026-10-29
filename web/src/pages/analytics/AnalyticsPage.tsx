@@ -20,20 +20,9 @@ export const AnalyticsPage: React.FC = () => {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-zinc-200">
         <div>
-          <div className="flex items-center gap-2">
-            <span className="text-xs font-mono uppercase px-2 py-0.5 rounded bg-zinc-100 border border-zinc-200 text-zinc-700 font-semibold">
-              Campus AV Telemetry
-            </span>
-            <span className="text-xs font-mono text-zinc-500">
-              Quarterly Audit Window
-            </span>
-          </div>
-          <h2 className="text-xl sm:text-2xl font-bold text-zinc-900 mt-1">
+          <h2 className="text-xl sm:text-2xl font-bold text-zinc-900">
             Recurring Faults & Room Analytics
           </h2>
-          <p className="text-xs sm:text-sm text-zinc-600">
-            Resolution performance, high-risk room rankings, and hardware failure categories
-          </p>
         </div>
       </div>
 

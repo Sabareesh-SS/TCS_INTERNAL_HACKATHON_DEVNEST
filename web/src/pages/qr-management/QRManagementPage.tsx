@@ -51,20 +51,9 @@ export const QRManagementPage: React.FC<QRManagementPageProps> = ({
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-zinc-200">
         <div>
-          <div className="flex items-center gap-2">
-            <span className="text-xs font-mono uppercase px-2 py-0.5 rounded bg-zinc-100 border border-zinc-200 text-zinc-700 font-semibold">
-              Administrative QR Suite
-            </span>
-            <span className="text-xs font-mono text-zinc-500">
-              Opaque Supabase Token Resolver
-            </span>
-          </div>
-          <h2 className="text-xl sm:text-2xl font-bold text-zinc-900 mt-1">
+          <h2 className="text-xl sm:text-2xl font-bold text-zinc-900">
             QR Code Management & Label Printing
           </h2>
-          <p className="text-xs sm:text-sm text-zinc-600">
-            Generate, preview, print, and securely revoke dual-mode QR identification tags
-          </p>
         </div>
 
         <button
@@ -182,51 +171,6 @@ export const QRManagementPage: React.FC<QRManagementPageProps> = ({
           onRegenerateToken={handleRegenerateDevice}
         />
       )}
-
-      {/* Specifications Comparison Table (from Section 5 Spec) */}
-      <div className="rounded-lg border border-zinc-200 bg-white shadow-xs overflow-hidden space-y-3 p-5">
-        <h4 className="text-xs font-mono uppercase tracking-wider text-zinc-800 font-bold">
-          Section 5 Architecture Specification: Dual QR Modes
-        </h4>
-        <div className="overflow-x-auto">
-          <table className="w-full text-left text-xs border-collapse">
-            <thead>
-              <tr className="border-b border-zinc-200 bg-zinc-50 font-mono text-[10px] uppercase text-zinc-500 font-semibold">
-                <th className="py-2.5 px-3">Function</th>
-                <th className="py-2.5 px-3">Classroom QR</th>
-                <th className="py-2.5 px-3">Individual Device QR</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-zinc-200 font-sans text-xs text-zinc-700">
-              <tr>
-                <td className="py-2.5 px-3 font-mono font-semibold text-zinc-800">Identify</td>
-                <td className="py-2.5 px-3">A classroom</td>
-                <td className="py-2.5 px-3">A registered AV device</td>
-              </tr>
-              <tr>
-                <td className="py-2.5 px-3 font-mono font-semibold text-zinc-800">Opens</td>
-                <td className="py-2.5 px-3">Classroom inventory & status</td>
-                <td className="py-2.5 px-3">Exact device details & telemetry</td>
-              </tr>
-              <tr>
-                <td className="py-2.5 px-3 font-mono font-semibold text-zinc-800">Main Action</td>
-                <td className="py-2.5 px-3">Select a faulty device from list</td>
-                <td className="py-2.5 px-3">Report a fault immediately</td>
-              </tr>
-              <tr>
-                <td className="py-2.5 px-3 font-mono font-semibold text-zinc-800">Printed Label</td>
-                <td className="py-2.5 px-3">Classroom entrance doorway</td>
-                <td className="py-2.5 px-3">Attached to equipment chassis</td>
-              </tr>
-              <tr>
-                <td className="py-2.5 px-3 font-mono font-semibold text-zinc-800">Backend Resolution</td>
-                <td className="py-2.5 px-3">Inventory retrieved from Supabase</td>
-                <td className="py-2.5 px-3">Device record retrieved from Supabase</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
     </div>
   );
 };

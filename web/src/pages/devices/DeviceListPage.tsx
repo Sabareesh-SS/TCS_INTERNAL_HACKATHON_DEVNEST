@@ -97,20 +97,9 @@ export const DeviceListPage: React.FC<DeviceListPageProps> = ({ onOpenQr, select
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-zinc-200">
         <div>
-          <div className="flex items-center gap-2">
-            <span className="text-xs font-mono uppercase px-2 py-0.5 rounded bg-zinc-100 border border-zinc-200 text-zinc-700 font-semibold">
-              Hardware Asset Registry
-            </span>
-            <span className="text-xs font-mono text-zinc-500">
-              {devices.length} Registered Devices
-            </span>
-          </div>
-          <h2 className="text-xl sm:text-2xl font-bold text-zinc-900 mt-1">
+          <h2 className="text-xl sm:text-2xl font-bold text-zinc-900">
             Equipment & Device Inventory
           </h2>
-          <p className="text-xs sm:text-sm text-zinc-600">
-            Serial numbers, firmware revisions, vendor manual citations, and chassis QR tags
-          </p>
         </div>
 
         {isAdmin && (

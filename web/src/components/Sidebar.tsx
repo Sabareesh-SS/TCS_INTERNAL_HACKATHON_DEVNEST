@@ -8,11 +8,8 @@ import {
   Cpu,
   BarChart3,
   QrCode,
-  BookOpen,
   Users,
-  Settings,
   Sparkles,
-  ShieldCheck,
 } from 'lucide-react';
 
 export type NavigationPage =
@@ -21,10 +18,8 @@ export type NavigationPage =
   | 'classrooms'
   | 'devices'
   | 'qr-management'
-  | 'knowledge-base'
   | 'reports'
   | 'users'
-  | 'settings'
   | 'profile';
 
 interface SidebarProps {
@@ -72,20 +67,6 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 Campus AV Operations
               </p>
             </div>
-          </div>
-        </div>
-
-        {/* Administrator Role Pill */}
-        <div className="p-3 mx-3 my-3 rounded bg-zinc-50 border border-zinc-200">
-          <div className="flex items-center justify-between text-xs font-mono">
-            <span className="text-zinc-500 uppercase text-[10px]">Dashboard Role</span>
-            <span className="px-1.5 py-0.5 rounded text-[10px] font-bold uppercase border border-violet-200 bg-violet-50 text-violet-700 flex items-center gap-1">
-              <ShieldCheck className="w-3 h-3 text-violet-600" />
-              Administrator
-            </span>
-          </div>
-          <div className="mt-1 flex items-center justify-between text-xs text-zinc-900 font-bold truncate">
-            <span className="truncate">{currentUser.name}</span>
           </div>
         </div>
 
@@ -185,20 +166,6 @@ export const Sidebar: React.FC<SidebarProps> = ({
             </button>
 
             <button
-              onClick={() => handleNav('knowledge-base')}
-              className={`w-full flex items-center justify-between px-3 py-2 text-xs font-mono rounded transition-colors ${
-                currentPage === 'knowledge-base'
-                  ? 'bg-zinc-100 text-zinc-900 font-bold border border-zinc-200'
-                  : 'text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100'
-              }`}
-            >
-              <div className="flex items-center gap-2.5">
-                <BookOpen className="w-4 h-4 text-violet-600" />
-                <span>RAG Knowledge Base</span>
-              </div>
-            </button>
-
-            <button
               onClick={() => handleNav('reports')}
               className={`w-full flex items-center justify-between px-3 py-2 text-xs font-mono rounded transition-colors ${
                 currentPage === 'reports'
@@ -223,20 +190,6 @@ export const Sidebar: React.FC<SidebarProps> = ({
               <div className="flex items-center gap-2.5">
                 <Users className="w-4 h-4 text-violet-600" />
                 <span>Technician Dispatch</span>
-              </div>
-            </button>
-
-            <button
-              onClick={() => handleNav('settings')}
-              className={`w-full flex items-center justify-between px-3 py-2 text-xs font-mono rounded transition-colors ${
-                currentPage === 'settings'
-                  ? 'bg-zinc-100 text-zinc-900 font-bold border border-zinc-200'
-                  : 'text-zinc-600 hover:text-zinc-900 hover:bg-zinc-100'
-              }`}
-            >
-              <div className="flex items-center gap-2.5">
-                <Settings className="w-4 h-4 text-violet-600" />
-                <span>System Settings</span>
               </div>
             </button>
           </div>

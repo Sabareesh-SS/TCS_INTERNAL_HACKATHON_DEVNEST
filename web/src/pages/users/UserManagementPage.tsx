@@ -138,20 +138,9 @@ export const UserManagementPage: React.FC = () => {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-zinc-200">
         <div>
-          <div className="flex items-center gap-2">
-            <span className="text-xs font-mono uppercase px-2 py-0.5 rounded bg-zinc-100 border border-zinc-200 text-zinc-700 font-semibold">
-              Administrative Control & RBAC
-            </span>
-            <span className="text-xs font-mono text-zinc-500">
-              Dashboard Role: Admin Only
-            </span>
-          </div>
-          <h2 className="text-xl sm:text-2xl font-bold text-zinc-900 mt-1">
+          <h2 className="text-xl sm:text-2xl font-bold text-zinc-900">
             Access Control & Field Staff Directory
           </h2>
-          <p className="text-xs sm:text-sm text-zinc-600">
-            Web dashboard access is restricted to Administrators. Manage campus administrators and field dispatch technicians.
-          </p>
         </div>
 
         <div className="flex items-center gap-2 shrink-0">
@@ -178,7 +167,7 @@ export const UserManagementPage: React.FC = () => {
           <div className="flex items-center gap-2">
             <ShieldCheck className="w-4 h-4 text-violet-600" />
             <h3 className="text-xs font-mono uppercase tracking-wider font-bold text-zinc-900">
-              Dashboard Administrators (Role: Admin)
+              Dashboard Administrators
             </h3>
           </div>
           <span className="text-xs font-mono text-zinc-500">
@@ -250,7 +239,7 @@ export const UserManagementPage: React.FC = () => {
           <div className="flex items-center gap-2">
             <Wrench className="w-4 h-4 text-sky-600" />
             <h3 className="text-xs font-mono uppercase tracking-wider font-bold text-zinc-900">
-              Campus Field Technicians (Mobile Dispatch Roster)
+              Campus Field Technicians
             </h3>
           </div>
           <span className="text-xs font-mono text-zinc-500">

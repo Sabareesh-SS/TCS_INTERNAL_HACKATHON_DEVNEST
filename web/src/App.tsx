@@ -13,9 +13,7 @@ import { ClassroomListPage } from './pages/classrooms/ClassroomListPage';
 import { DeviceListPage } from './pages/devices/DeviceListPage';
 import { QRManagementPage } from './pages/qr-management/QRManagementPage';
 import { AnalyticsPage } from './pages/analytics/AnalyticsPage';
-import { KnowledgeBasePage } from './pages/knowledge-base/KnowledgeBasePage';
 import { UserManagementPage } from './pages/users/UserManagementPage';
-import { SettingsPage } from './pages/settings/SettingsPage';
 import { ProfilePage } from './pages/profile/ProfilePage';
 
 const MainApp: React.FC = () => {
@@ -141,11 +139,7 @@ const MainApp: React.FC = () => {
                 />
               )}
 
-              {currentPage === 'knowledge-base' && <KnowledgeBasePage />}
-
               {currentPage === 'users' && <UserManagementPage />}
-
-              {currentPage === 'settings' && <SettingsPage />}
 
               {currentPage === 'profile' && <ProfilePage />}
             </>
