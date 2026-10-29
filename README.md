@@ -251,6 +251,12 @@ python scripts/seed_supabase.py
 TCS_INTERNAL_HACKATHON_DEVNEST/
 ├── README.md                               # Root project documentation (this file)
 ├── .gitignore                              # Root Git ignore rules
+├── web/                                    # Member 2 Admin & Technician Web Dashboard (React + Vite)
+│   ├── README.md                           # Web dashboard documentation
+│   ├── package.json                        # Node dependencies
+│   ├── vite.config.ts                      # Vite build configuration
+│   ├── index.html                          # Entry HTML
+│   └── src/                                # Pages, components, context & services
 ├── mobile/                                 # Member 1 Faculty & Technician Mobile App (React Native)
 │   ├── README.md                           # Mobile app documentation
 │   ├── App.tsx                             # Application root

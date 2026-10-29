@@ -8,3 +8,8 @@ __pycache__/
 */.env
 .pytest_cache/
 */.pytest_cache/
+node_modules/
+*/node_modules/
+dist/
+*/dist/
+
