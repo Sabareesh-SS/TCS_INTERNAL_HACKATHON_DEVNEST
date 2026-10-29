@@ -1,173 +1,358 @@
 import { Device } from '../types/device';
 
-const SEED_DEVICES: Device[] = [
+const REAL_CAMPUS_DEVICES: Device[] = [
+  // Room AB-204
   {
-    id: 'AV-P204-01',
-    name: 'Auditorium Laser Projector',
-    model: 'Panasonic PT-MZ780 (7000 lm WUXGA)',
+    id: 'DEV001',
+    name: 'Classroom 3LCD Projector',
+    model: 'Epson PowerLite EB-E01 / EB-X06 (DEMO-P01)',
     type: 'projector',
     classroomId: 'AB-204',
-    classroomName: 'Academic Block A · Room 204',
-    health: 'faulty',
-    serialNumber: 'PN-MZ780-99214-A',
-    ipAddress: '10.14.24.41',
-    firmwareVersion: 'v2.18.04',
+    classroomName: 'Academic Block A · Room AB-204',
+    health: 'healthy',
+    serialNumber: 'EP-EB01-99214-A',
     installDate: '2024-03-15',
-    lastInspected: '2026-09-12',
+    lastInspected: '2026-10-15',
     manual: {
-      title: 'Panasonic PT-MZ780 Operating Instructions Rev 3.2',
-      docUrl: 'https://docs.panasonic-av.example/manuals/pt-mz780-rev3.2.pdf',
-      revision: 'Rev 3.2',
-      relevantPage: 42,
+      title: 'Epson EB-E01/EB-X06 User Guide',
+      docUrl: 'https://files.support.epson.com/docid/cpd5/cpd59263.pdf',
+      revision: 'CPD-59263',
+      relevantPage: 38,
     },
-    qrIdentifier: 'qr_dev_p204_01_tok_89a3f1',
+    qrIdentifier: 'QR-DEV-AV-AB204-P01',
   },
   {
-    id: 'AV-M105-02',
-    name: 'Faculty Wireless Lapel Microphone',
-    model: 'Shure ULXD4 Digital Wireless Receiver + ULXD1 Bodypack',
+    id: 'DEV002',
+    name: 'Wireless Presenter Microphone',
+    model: 'Shure BLX24 / PG58 Wireless System (DEMO-M01)',
+    type: 'microphone',
+    classroomId: 'AB-204',
+    classroomName: 'Academic Block A · Room AB-204',
+    health: 'healthy',
+    serialNumber: 'SH-BLX24-44102-X',
+    installDate: '2023-11-20',
+    lastInspected: '2026-09-30',
+    manual: {
+      title: 'Shure BLX Wireless System User Guide',
+      docUrl: 'https://files.support.epson.com/docid/cpd5/cpd59263.pdf',
+      revision: 'Rev 5.2',
+      relevantPage: 14,
+    },
+    qrIdentifier: 'QR-DEV-AV-AB204-M01',
+  },
+  {
+    id: 'DEV003',
+    name: 'Interactive Flat Panel 75"',
+    model: 'Promethean ActivPanel 9 Series (DEMO-S01)',
+    type: 'smartboard',
+    classroomId: 'AB-204',
+    classroomName: 'Academic Block A · Room AB-204',
+    health: 'healthy',
+    serialNumber: 'PRM-AP9-88319-K',
+    installDate: '2024-01-10',
+    lastInspected: '2026-10-20',
+    manual: {
+      title: 'Promethean ActivPanel 9 User Guide',
+      docUrl: 'https://files.support.epson.com/docid/cpd5/cpd59263.pdf',
+      revision: 'AP9-UG-V2',
+      relevantPage: 45,
+    },
+    qrIdentifier: 'QR-DEV-AV-AB204-S01',
+  },
+
+  // Room AB-105
+  {
+    id: 'DEV004',
+    name: 'Auditorium Laser Projector',
+    model: 'Epson PowerLite EB-E01 / EB-X06 (DEMO-P02)',
+    type: 'projector',
+    classroomId: 'AB-105',
+    classroomName: 'Academic Block A · Room AB-105',
+    health: 'faulty',
+    serialNumber: 'EP-EB01-10294-B',
+    installDate: '2024-03-15',
+    lastInspected: '2026-10-28',
+    manual: {
+      title: 'Epson EB-E01/EB-X06 User Guide',
+      docUrl: 'https://files.support.epson.com/docid/cpd5/cpd59263.pdf',
+      revision: 'CPD-59263',
+      relevantPage: 38,
+    },
+    qrIdentifier: 'QR-DEV-AV-AB105-P01',
+  },
+  {
+    id: 'DEV005',
+    name: 'Wireless Handheld Microphone',
+    model: 'Shure BLX24 / PG58 Wireless System (DEMO-M02)',
     type: 'microphone',
     classroomId: 'AB-105',
-    classroomName: 'Academic Block A · Room 105',
-    health: 'faulty',
-    serialNumber: 'SH-ULXD4-44102-X',
-    ipAddress: '10.14.15.22',
-    firmwareVersion: 'v2.4.1',
-    installDate: '2023-11-20',
-    lastInspected: '2026-08-30',
-    manual: {
-      title: 'Shure ULX-D Digital Wireless Receiver Guide Rev 7',
-      docUrl: 'https://docs.shure-av.example/manuals/ulxd-rev7.pdf',
-      revision: 'Rev 7.0',
-      relevantPage: 28,
-    },
-    qrIdentifier: 'qr_dev_m105_02_tok_47b9c2',
-  },
-  {
-    id: 'AV-SB301-01',
-    name: 'Front Wall Interactive Display 75"',
-    model: 'SMART Board MX275-V3 Pro Interactive Display',
-    type: 'smartboard',
-    classroomId: 'AB-301',
-    classroomName: 'Academic Block A · Room 301',
+    classroomName: 'Academic Block A · Room AB-105',
     health: 'healthy',
-    serialNumber: 'SB-MX275-88319-K',
-    ipAddress: '10.14.31.15',
-    firmwareVersion: 'v3.8.192',
+    serialNumber: 'SH-BLX24-55912-Y',
+    installDate: '2023-11-20',
+    lastInspected: '2026-09-12',
+    manual: {
+      title: 'Shure BLX Wireless System User Guide',
+      docUrl: 'https://files.support.epson.com/docid/cpd5/cpd59263.pdf',
+      revision: 'Rev 5.2',
+      relevantPage: 14,
+    },
+    qrIdentifier: 'QR-DEV-AV-AB105-M01',
+  },
+  {
+    id: 'DEV006',
+    name: 'Interactive Smart Board 75"',
+    model: 'Promethean ActivPanel 9 Series (DEMO-S02)',
+    type: 'smartboard',
+    classroomId: 'AB-105',
+    classroomName: 'Academic Block A · Room AB-105',
+    health: 'healthy',
+    serialNumber: 'PRM-AP9-77218-L',
     installDate: '2024-01-10',
-    lastInspected: '2026-10-29',
-    manual: {
-      title: 'SMART Board MX Pro Series Installation & Maintenance Guide',
-      docUrl: 'https://docs.smarttech.example/manuals/mx275-guide.pdf',
-      revision: 'Rev 4.1',
-      relevantPage: 67,
-    },
-    qrIdentifier: 'qr_dev_sb301_01_tok_1109a8',
-  },
-  {
-    id: 'AV-CAM-EHA',
-    name: 'Robotic Lecture Tracking Camera',
-    model: 'Sony BRC-X400 4K PTZ Camera',
-    type: 'ptz-camera',
-    classroomId: 'ENG-A',
-    classroomName: 'Engineering Block · Main Hall A',
-    health: 'faulty',
-    serialNumber: 'SNY-BRCX-00381-Z',
-    ipAddress: '10.14.50.80',
-    firmwareVersion: 'v3.0.0',
-    installDate: '2023-09-01',
-    lastInspected: '2026-07-15',
-    manual: {
-      title: 'Sony BRC-X400 Technical & VISCA Protocol Reference',
-      docUrl: 'https://pro.sony.example/manuals/brc-x400.pdf',
-      revision: 'Rev 2.0',
-      relevantPage: 88,
-    },
-    qrIdentifier: 'qr_dev_cameha_tok_6623e1',
-  },
-  {
-    id: 'AV-CR302-01',
-    name: 'Classroom AV Automation Processor',
-    model: 'Crestron CP4N 4-Series Control System',
-    type: 'crestron',
-    classroomId: 'SCI-302',
-    classroomName: 'Science Complex · Lab 302',
-    health: 'degraded',
-    serialNumber: 'CR-CP4N-11920-P',
-    ipAddress: '10.14.32.10',
-    firmwareVersion: 'v2.8001.00067',
-    installDate: '2024-05-22',
-    lastInspected: '2026-09-05',
-    manual: {
-      title: 'Crestron 4-Series Control Systems Reference Manual',
-      docUrl: 'https://crestron.example/manuals/cp4n-ref.pdf',
-      revision: 'Rev 1.9',
-      relevantPage: 54,
-    },
-    qrIdentifier: 'qr_dev_cr302_01_tok_9934c5',
-  },
-  {
-    id: 'AV-AMP204-01',
-    name: 'Multi-Channel Ceiling Speaker Amplifier',
-    model: 'Crown DriveCore CDI 4|300 Network DSP Amp',
-    type: 'amplifier',
-    classroomId: 'AB-204',
-    classroomName: 'Academic Block A · Room 204',
-    health: 'degraded',
-    serialNumber: 'CRW-CDI4300-8812',
-    ipAddress: '10.14.24.45',
-    firmwareVersion: 'v1.4.2',
-    installDate: '2023-06-18',
-    lastInspected: '2026-08-11',
-    manual: {
-      title: 'Crown CDi DriveCore Series Operation Manual',
-      docUrl: 'https://crownaudio.example/manuals/cdi-drivecore.pdf',
-      revision: 'Rev 2.4',
-      relevantPage: 36,
-    },
-    qrIdentifier: 'qr_dev_amp204_01_tok_7721d0',
-  },
-  {
-    id: 'AV-SW105-01',
-    name: 'Auditorium Matrix Presentation Switcher',
-    model: 'Extron IN1608 xi IPCP Presentation Switcher',
-    type: 'switcher',
-    classroomId: 'LIB-AUD',
-    classroomName: 'Central Library · Main Auditorium',
-    health: 'degraded',
-    serialNumber: 'EXT-IN1608-55201',
-    ipAddress: '10.14.90.12',
-    firmwareVersion: 'v2.01',
-    installDate: '2023-12-04',
-    lastInspected: '2026-09-20',
-    manual: {
-      title: 'Extron IN1608 Series Scaling Switcher User Guide',
-      docUrl: 'https://extron.example/manuals/in1608-guide.pdf',
-      revision: 'Rev 3.0',
-      relevantPage: 73,
-    },
-    qrIdentifier: 'qr_dev_sw105_01_tok_3391b4',
-  },
-  {
-    id: 'AV-P301-01',
-    name: 'Laser Projection Display 15000 Lumens',
-    model: 'Epson EB-L1505UH Laser Projector',
-    type: 'projector',
-    classroomId: 'SCI-302',
-    classroomName: 'Science Complex · Lab 302',
-    health: 'degraded',
-    serialNumber: 'EPS-L1505-77291',
-    ipAddress: '10.14.32.40',
-    firmwareVersion: 'v1.12',
-    installDate: '2024-02-14',
     lastInspected: '2026-10-01',
     manual: {
-      title: 'Epson EB-L1500 Series Service Manual',
-      docUrl: 'https://epson.example/manuals/eb-l1505uh-service.pdf',
-      revision: 'Rev 1.2',
-      relevantPage: 112,
+      title: 'Promethean ActivPanel 9 User Guide',
+      docUrl: 'https://files.support.epson.com/docid/cpd5/cpd59263.pdf',
+      revision: 'AP9-UG-V2',
+      relevantPage: 45,
     },
-    qrIdentifier: 'qr_dev_p301_01_tok_8824a9',
+    qrIdentifier: 'QR-DEV-AV-AB105-S01',
+  },
+
+  // Room CB-301
+  {
+    id: 'DEV007',
+    name: 'Seminar Hall Projector',
+    model: 'Epson PowerLite EB-E01 / EB-X06 (DEMO-P03)',
+    type: 'projector',
+    classroomId: 'CB-301',
+    classroomName: 'Computer Block · Room CB-301',
+    health: 'healthy',
+    serialNumber: 'EP-EB01-33819-C',
+    installDate: '2024-02-10',
+    lastInspected: '2026-10-18',
+    manual: {
+      title: 'Epson EB-E01/EB-X06 User Guide',
+      docUrl: 'https://files.support.epson.com/docid/cpd5/cpd59263.pdf',
+      revision: 'CPD-59263',
+      relevantPage: 38,
+    },
+    qrIdentifier: 'QR-DEV-AV-CB301-P01',
+  },
+  {
+    id: 'DEV008',
+    name: 'Wireless Lapel Microphone',
+    model: 'Shure BLX24 / PG58 Wireless System (DEMO-M03)',
+    type: 'microphone',
+    classroomId: 'CB-301',
+    classroomName: 'Computer Block · Room CB-301',
+    health: 'faulty',
+    serialNumber: 'SH-BLX24-99120-Z',
+    installDate: '2023-10-15',
+    lastInspected: '2026-10-25',
+    manual: {
+      title: 'Shure BLX Wireless System User Guide',
+      docUrl: 'https://files.support.epson.com/docid/cpd5/cpd59263.pdf',
+      revision: 'Rev 5.2',
+      relevantPage: 14,
+    },
+    qrIdentifier: 'QR-DEV-AV-CB301-M01',
+  },
+  {
+    id: 'DEV009',
+    name: 'Interactive Touch Panel',
+    model: 'Promethean ActivPanel 9 Series (DEMO-S03)',
+    type: 'smartboard',
+    classroomId: 'CB-301',
+    classroomName: 'Computer Block · Room CB-301',
+    health: 'healthy',
+    serialNumber: 'PRM-AP9-11029-M',
+    installDate: '2024-01-15',
+    lastInspected: '2026-10-10',
+    manual: {
+      title: 'Promethean ActivPanel 9 User Guide',
+      docUrl: 'https://files.support.epson.com/docid/cpd5/cpd59263.pdf',
+      revision: 'AP9-UG-V2',
+      relevantPage: 45,
+    },
+    qrIdentifier: 'QR-DEV-AV-CB301-S01',
+  },
+
+  // Room EB-202
+  {
+    id: 'DEV010',
+    name: 'Engineering Hall Projector',
+    model: 'Epson PowerLite EB-E01 / EB-X06 (DEMO-P04)',
+    type: 'projector',
+    classroomId: 'EB-202',
+    classroomName: 'Engineering Block · Room EB-202',
+    health: 'healthy',
+    serialNumber: 'EP-EB01-44910-D',
+    installDate: '2024-04-01',
+    lastInspected: '2026-10-12',
+    manual: {
+      title: 'Epson EB-E01/EB-X06 User Guide',
+      docUrl: 'https://files.support.epson.com/docid/cpd5/cpd59263.pdf',
+      revision: 'CPD-59263',
+      relevantPage: 38,
+    },
+    qrIdentifier: 'QR-DEV-AV-EB202-P01',
+  },
+  {
+    id: 'DEV011',
+    name: 'Presenter Podium Microphone',
+    model: 'Shure BLX24 / PG58 Wireless System (DEMO-M04)',
+    type: 'microphone',
+    classroomId: 'EB-202',
+    classroomName: 'Engineering Block · Room EB-202',
+    health: 'healthy',
+    serialNumber: 'SH-BLX24-88314-A',
+    installDate: '2023-12-05',
+    lastInspected: '2026-09-18',
+    manual: {
+      title: 'Shure BLX Wireless System User Guide',
+      docUrl: 'https://files.support.epson.com/docid/cpd5/cpd59263.pdf',
+      revision: 'Rev 5.2',
+      relevantPage: 14,
+    },
+    qrIdentifier: 'QR-DEV-AV-EB202-M01',
+  },
+  {
+    id: 'DEV012',
+    name: 'Front Wall Interactive Screen',
+    model: 'Promethean ActivPanel 9 Series (DEMO-S04)',
+    type: 'smartboard',
+    classroomId: 'EB-202',
+    classroomName: 'Engineering Block · Room EB-202',
+    health: 'healthy',
+    serialNumber: 'PRM-AP9-66103-N',
+    installDate: '2024-02-20',
+    lastInspected: '2026-10-14',
+    manual: {
+      title: 'Promethean ActivPanel 9 User Guide',
+      docUrl: 'https://files.support.epson.com/docid/cpd5/cpd59263.pdf',
+      revision: 'AP9-UG-V2',
+      relevantPage: 45,
+    },
+    qrIdentifier: 'QR-DEV-AV-EB202-S01',
+  },
+
+  // Room LB-110
+  {
+    id: 'DEV013',
+    name: 'Digital Library Projector',
+    model: 'Epson PowerLite EB-E01 / EB-X06 (DEMO-P05)',
+    type: 'projector',
+    classroomId: 'LB-110',
+    classroomName: 'Library Block · Room LB-110',
+    health: 'healthy',
+    serialNumber: 'EP-EB01-55821-E',
+    installDate: '2024-04-10',
+    lastInspected: '2026-10-08',
+    manual: {
+      title: 'Epson EB-E01/EB-X06 User Guide',
+      docUrl: 'https://files.support.epson.com/docid/cpd5/cpd59263.pdf',
+      revision: 'CPD-59263',
+      relevantPage: 38,
+    },
+    qrIdentifier: 'QR-DEV-AV-LB110-P01',
+  },
+  {
+    id: 'DEV014',
+    name: 'Seminar Wireless Microphone',
+    model: 'Shure BLX24 / PG58 Wireless System (DEMO-M05)',
+    type: 'microphone',
+    classroomId: 'LB-110',
+    classroomName: 'Library Block · Room LB-110',
+    health: 'healthy',
+    serialNumber: 'SH-BLX24-33102-B',
+    installDate: '2023-11-15',
+    lastInspected: '2026-09-22',
+    manual: {
+      title: 'Shure BLX Wireless System User Guide',
+      docUrl: 'https://files.support.epson.com/docid/cpd5/cpd59263.pdf',
+      revision: 'Rev 5.2',
+      relevantPage: 14,
+    },
+    qrIdentifier: 'QR-DEV-AV-LB110-M01',
+  },
+  {
+    id: 'DEV015',
+    name: 'Library Interactive Board',
+    model: 'Promethean ActivPanel 9 Series (DEMO-S05)',
+    type: 'smartboard',
+    classroomId: 'LB-110',
+    classroomName: 'Library Block · Room LB-110',
+    health: 'healthy',
+    serialNumber: 'PRM-AP9-44192-P',
+    installDate: '2024-02-15',
+    lastInspected: '2026-10-19',
+    manual: {
+      title: 'Promethean ActivPanel 9 User Guide',
+      docUrl: 'https://files.support.epson.com/docid/cpd5/cpd59263.pdf',
+      revision: 'AP9-UG-V2',
+      relevantPage: 45,
+    },
+    qrIdentifier: 'QR-DEV-AV-LB110-S01',
+  },
+
+  // Room AB-302
+  {
+    id: 'DEV016',
+    name: 'Lecture Hall Projector',
+    model: 'Epson PowerLite EB-E01 / EB-X06 (DEMO-P06)',
+    type: 'projector',
+    classroomId: 'AB-302',
+    classroomName: 'Academic Block A · Room AB-302',
+    health: 'healthy',
+    serialNumber: 'EP-EB01-77192-F',
+    installDate: '2024-05-01',
+    lastInspected: '2026-10-22',
+    manual: {
+      title: 'Epson EB-E01/EB-X06 User Guide',
+      docUrl: 'https://files.support.epson.com/docid/cpd5/cpd59263.pdf',
+      revision: 'CPD-59263',
+      relevantPage: 38,
+    },
+    qrIdentifier: 'QR-DEV-AV-AB302-P01',
+  },
+  {
+    id: 'DEV017',
+    name: 'Faculty Wireless Microphone',
+    model: 'Shure BLX24 / PG58 Wireless System (DEMO-M06)',
+    type: 'microphone',
+    classroomId: 'AB-302',
+    classroomName: 'Academic Block A · Room AB-302',
+    health: 'healthy',
+    serialNumber: 'SH-BLX24-11928-C',
+    installDate: '2023-12-10',
+    lastInspected: '2026-09-28',
+    manual: {
+      title: 'Shure BLX Wireless System User Guide',
+      docUrl: 'https://files.support.epson.com/docid/cpd5/cpd59263.pdf',
+      revision: 'Rev 5.2',
+      relevantPage: 14,
+    },
+    qrIdentifier: 'QR-DEV-AV-AB302-M01',
+  },
+  {
+    id: 'DEV018',
+    name: 'Smart Presentation Board',
+    model: 'Promethean ActivPanel 9 Series (DEMO-S06)',
+    type: 'smartboard',
+    classroomId: 'AB-302',
+    classroomName: 'Academic Block A · Room AB-302',
+    health: 'healthy',
+    serialNumber: 'PRM-AP9-99201-Q',
+    installDate: '2024-03-01',
+    lastInspected: '2026-10-24',
+    manual: {
+      title: 'Promethean ActivPanel 9 User Guide',
+      docUrl: 'https://files.support.epson.com/docid/cpd5/cpd59263.pdf',
+      revision: 'AP9-UG-V2',
+      relevantPage: 45,
+    },
+    qrIdentifier: 'QR-DEV-AV-AB302-S01',
   },
 ];
 
@@ -178,20 +363,23 @@ export const deviceService = {
     const data = localStorage.getItem(STORAGE_KEY);
     if (data) {
       try {
-        return JSON.parse(data);
+        const parsed = JSON.parse(data);
+        if (Array.isArray(parsed) && parsed.length >= 18 && parsed[0].id === 'DEV001') {
+          return parsed;
+        }
       } catch {
         // fallback
       }
     }
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(SEED_DEVICES));
-    return SEED_DEVICES;
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(REAL_CAMPUS_DEVICES));
+    return REAL_CAMPUS_DEVICES;
   },
 
   getById: (id: string): Device | undefined => {
-    return deviceService.getAll().find((d) => d.id.toLowerCase() === id.toLowerCase());
+    return deviceService.getAll().find((d) => d.id.toLowerCase() === id.toLowerCase() || d.qrIdentifier.toLowerCase() === id.toLowerCase());
   },
 
-  getByClassroom: (classroomId: string): Device[] => {
+  getByRoom: (classroomId: string): Device[] => {
     return deviceService.getAll().filter((d) => d.classroomId.toLowerCase() === classroomId.toLowerCase());
   },
 
@@ -202,12 +390,12 @@ export const deviceService = {
     return device;
   },
 
-  updateDevice: (id: string, updates: Partial<Device>): Device => {
+  updateHealth: (deviceId: string, health: Device['health']): Device => {
     const list = deviceService.getAll();
-    const index = list.findIndex((d) => d.id === id);
+    const index = list.findIndex((d) => d.id === deviceId);
     if (index === -1) throw new Error('Device not found');
 
-    const updated = { ...list[index], ...updates };
+    const updated = { ...list[index], health };
     list[index] = updated;
     localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
     return updated;
@@ -218,7 +406,7 @@ export const deviceService = {
     const index = list.findIndex((d) => d.id === deviceId);
     if (index === -1) throw new Error('Device not found');
 
-    const newToken = `qr_dev_${deviceId.toLowerCase().replace(/[^a-z0-9]/g, '')}_tok_${Math.random().toString(36).substring(2, 8)}`;
+    const newToken = `QR-DEV-${list[index].id}-${Math.random().toString(36).substring(2, 6).toUpperCase()}`;
     list[index].qrIdentifier = newToken;
     localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
     return newToken;
