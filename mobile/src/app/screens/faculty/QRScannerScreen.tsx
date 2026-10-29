@@ -221,69 +221,69 @@ export const QRScannerScreen: React.FC<QRScannerScreenProps> = ({ navigation }) 
           <View style={styles.codeList}>
             <TouchableOpacity
               activeOpacity={0.7}
-              onPress={() => processPayload('classroom:CR-402')}
+              onPress={() => processPayload('QR-CLS-AB105')}
               style={styles.codeCard}
             >
               <View style={styles.codeRow}>
                 <Text style={[typography.badge, styles.codeBadge]}>CLASSROOM</Text>
-                <Text style={[typography.code, styles.codeId]}>CR-402</Text>
+                <Text style={[typography.code, styles.codeId]}>AB-105</Text>
               </View>
               <Text style={[typography.bodyMedium, styles.codeTitle]}>
-                Room 402 - Ramanujan Block
+                Academic Block A · Room 105
               </Text>
               <Text style={[typography.caption, styles.codeSubtitle]}>
-                Raw QR Value: "classroom:CR-402"
+                Raw QR Value: "QR-CLS-AB105"
               </Text>
             </TouchableOpacity>
 
             <TouchableOpacity
               activeOpacity={0.7}
-              onPress={() => processPayload('device:DEV-PRJ-402')}
+              onPress={() => processPayload('QR-DEV-AV-AB105-P01')}
               style={styles.codeCard}
             >
               <View style={styles.codeRow}>
                 <Text style={[typography.badge, styles.codeBadge]}>DEVICE</Text>
-                <Text style={[typography.code, styles.codeId]}>DEV-PRJ-402</Text>
+                <Text style={[typography.code, styles.codeId]}>DEV004</Text>
               </View>
               <Text style={[typography.bodyMedium, styles.codeTitle]}>
-                Epson EB-L630U Laser Projector
+                Epson PowerLite EB-E01 (Demo DEMO-P02)
               </Text>
               <Text style={[typography.caption, styles.codeSubtitle]}>
-                Raw QR Value: "device:DEV-PRJ-402"
+                Raw QR Value: "QR-DEV-AV-AB105-P01"
               </Text>
             </TouchableOpacity>
 
             <TouchableOpacity
               activeOpacity={0.7}
-              onPress={() => processPayload('device:DEV-MIC-402')}
+              onPress={() => processPayload('QR-DEV-AV-AB105-M01')}
               style={styles.codeCard}
             >
               <View style={styles.codeRow}>
                 <Text style={[typography.badge, styles.codeBadge]}>DEVICE</Text>
-                <Text style={[typography.code, styles.codeId]}>DEV-MIC-402</Text>
+                <Text style={[typography.code, styles.codeId]}>DEV005</Text>
               </View>
               <Text style={[typography.bodyMedium, styles.codeTitle]}>
-                Shure BLX24/PG58 Wireless Microphone
+                Shure BLX24 / PG58 Wireless Microphone
               </Text>
               <Text style={[typography.caption, styles.codeSubtitle]}>
-                Raw QR Value: "device:DEV-MIC-402"
+                Raw QR Value: "QR-DEV-AV-AB105-M01"
               </Text>
             </TouchableOpacity>
 
             <TouchableOpacity
               activeOpacity={0.7}
-              onPress={() => processPayload('classroom:CR-201')}
+              onPress={() => processPayload('QR-CLS-AB204')}
               style={styles.codeCard}
             >
               <View style={styles.codeRow}>
                 <Text style={[typography.badge, styles.codeBadge]}>CLASSROOM</Text>
-                <Text style={[typography.code, styles.codeId]}>CR-201</Text>
+                <Text style={[typography.code, styles.codeId]}>AB-204</Text>
               </View>
               <Text style={[typography.bodyMedium, styles.codeTitle]}>
-                Room 201 - Turing Center
+                Academic Block A · Room 204
               </Text>
               <Text style={[typography.caption, styles.codeSubtitle]}>
-                Raw QR Value: "classroom:CR-201"
+                Raw QR Value: "QR-CLS-AB204"
               </Text>
             </TouchableOpacity>
           </View>
@@ -293,7 +293,7 @@ export const QRScannerScreen: React.FC<QRScannerScreenProps> = ({ navigation }) 
         <View style={styles.manualCard}>
           <Text style={[typography.h4, styles.manualTitle]}>ENTER QR CODE MANUALLY</Text>
           <TextInputField
-            placeholder="e.g. classroom:CR-402 or DEV-PRJ-402"
+            placeholder="e.g. QR-CLS-AB105 or DEV004"
             value={manualCode}
             onChangeText={setManualCode}
             autoCapitalize="none"

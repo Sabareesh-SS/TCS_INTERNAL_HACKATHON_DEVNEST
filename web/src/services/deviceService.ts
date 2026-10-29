@@ -356,7 +356,16 @@ const REAL_CAMPUS_DEVICES: Device[] = [
   },
 ];
 
-const STORAGE_KEY = 'tscai_devices_data';
+const STORAGE_KEY = 'tscai_campus_devices_v3';
+
+if (typeof window !== 'undefined') {
+  try {
+    const legacyOld = localStorage.getItem('tscai_devices_data');
+    if (legacyOld && (legacyOld.includes('PT-MZ780') || legacyOld.includes('AV-P204-01') || legacyOld.includes('Sony') || legacyOld.includes('Crestron'))) {
+      localStorage.removeItem('tscai_devices_data');
+    }
+  } catch {}
+}
 
 export const deviceService = {
   getAll: (): Device[] => {

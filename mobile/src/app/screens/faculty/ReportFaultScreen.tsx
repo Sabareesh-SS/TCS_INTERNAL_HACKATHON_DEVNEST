@@ -21,14 +21,14 @@ export const ReportFaultScreen: React.FC<ReportFaultScreenProps> = ({
   navigation,
 }) => {
   const device: Device = route.params?.device || {
-    id: 'DEV-PRJ-402',
-    classroomId: 'CR-402',
-    classroomName: 'Room 402 - Ramanujan Block',
+    id: 'DEV004',
+    classroomId: 'AB-105',
+    classroomName: 'Academic Block A · Room 105',
     deviceType: 'projector',
-    manufacturer: 'Epson',
-    modelNumber: 'EB-L630U Laser Projector',
-    assetTag: 'PRJ-402-A',
-    serialNumber: 'EP-99482711-X',
+    manufacturer: 'DemoBrand (Epson)',
+    modelNumber: 'DEMO-P02 (EB-E01 / EB-X06)',
+    assetTag: 'AST-P02',
+    serialNumber: 'QR-DEV-AV-AB105-P01',
     status: 'faulty',
   };
 

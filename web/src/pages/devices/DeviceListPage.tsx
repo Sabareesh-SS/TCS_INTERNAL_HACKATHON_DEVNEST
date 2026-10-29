@@ -286,7 +286,7 @@ export const DeviceListPage: React.FC<DeviceListPageProps> = ({ onOpenQr, select
                   required
                   value={newModel}
                   onChange={(e) => setNewModel(e.target.value)}
-                  placeholder="Panasonic PT-VMZ51U"
+                  placeholder="Epson PowerLite EB-E01"
                   className="w-full bg-zinc-50 border border-zinc-200 rounded px-3 py-2 text-zinc-900 focus:bg-white focus:outline-none focus:border-zinc-400"
                 />
               </div>
@@ -317,10 +317,10 @@ export const DeviceListPage: React.FC<DeviceListPageProps> = ({ onOpenQr, select
                   >
                     <option value="AB-204">AB-204</option>
                     <option value="AB-105">AB-105</option>
-                    <option value="AB-301">AB-301</option>
-                    <option value="ENG-A">ENG-A</option>
-                    <option value="SCI-302">SCI-302</option>
-                    <option value="LIB-AUD">LIB-AUD</option>
+                    <option value="CB-301">CB-301</option>
+                    <option value="EB-202">EB-202</option>
+                    <option value="LB-110">LB-110</option>
+                    <option value="AB-302">AB-302</option>
                   </select>
                 </div>
               </div>
@@ -331,7 +331,7 @@ export const DeviceListPage: React.FC<DeviceListPageProps> = ({ onOpenQr, select
                   type="text"
                   value={newManualTitle}
                   onChange={(e) => setNewManualTitle(e.target.value)}
-                  placeholder="Panasonic PT-VMZ Series Operating Guide Rev 2"
+                  placeholder="Epson EB-E01 User's Guide (CPD-59263)"
                   className="w-full bg-zinc-50 border border-zinc-200 rounded px-3 py-2 text-zinc-900 focus:bg-white focus:outline-none focus:border-zinc-400"
                 />
               </div>

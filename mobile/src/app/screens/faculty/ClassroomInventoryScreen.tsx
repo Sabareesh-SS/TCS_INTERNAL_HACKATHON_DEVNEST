@@ -18,7 +18,7 @@ export const ClassroomInventoryScreen: React.FC<ClassroomInventoryScreenProps> =
   route,
   navigation,
 }) => {
-  const classroomId = route.params?.classroomId || 'CR-402';
+  const classroomId = route.params?.classroomId || 'AB-105';
   const { currentClassroom, devices, isLoading, error, refresh } = useClassroom(classroomId);
 
   if (isLoading) return <LoadingView message="LOADING CLASSROOM INVENTORY..." />;

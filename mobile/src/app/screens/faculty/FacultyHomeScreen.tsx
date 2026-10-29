@@ -47,7 +47,7 @@ export const FacultyHomeScreen: React.FC<FacultyHomeScreenProps> = ({ navigation
         {/* Secondary Direct Room Action */}
         <TouchableOpacity
           activeOpacity={0.8}
-          onPress={() => navigation.navigate('ClassroomInventory', { classroomId: 'CR-402' })}
+          onPress={() => navigation.navigate('ClassroomInventory', { classroomId: 'AB-105' })}
           style={styles.secondaryCard}
         >
           <View style={styles.secTopRow}>

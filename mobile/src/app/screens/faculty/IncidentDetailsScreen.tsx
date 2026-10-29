@@ -21,7 +21,7 @@ export const IncidentDetailsScreen: React.FC<IncidentDetailsScreenProps> = ({
   route,
   navigation,
 }) => {
-  const incidentId: string = route.params?.incidentId || 'INC-2026-081';
+  const incidentId: string = route.params?.incidentId || 'INC-2026-001';
   const [incident, setIncident] = useState<Incident | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 

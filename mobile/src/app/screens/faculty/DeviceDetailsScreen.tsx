@@ -20,7 +20,7 @@ export const DeviceDetailsScreen: React.FC<DeviceDetailsScreenProps> = ({
   route,
   navigation,
 }) => {
-  const deviceId = route.params?.deviceId || 'DEV-PRJ-402';
+  const deviceId = route.params?.deviceId || 'DEV004';
   const [device, setDevice] = useState<Device | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);

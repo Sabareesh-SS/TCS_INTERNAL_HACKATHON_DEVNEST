@@ -69,7 +69,16 @@ const REAL_CAMPUS_CLASSROOMS: Classroom[] = [
   },
 ];
 
-const STORAGE_KEY = 'tscai_classrooms_data';
+const STORAGE_KEY = 'tscai_campus_classrooms_v3';
+
+if (typeof window !== 'undefined') {
+  try {
+    const legacyOld = localStorage.getItem('tscai_classrooms_data');
+    if (legacyOld && (legacyOld.includes('ENG-A') || legacyOld.includes('SCI-302') || legacyOld.includes('LIB-AUD'))) {
+      localStorage.removeItem('tscai_classrooms_data');
+    }
+  } catch {}
+}
 
 export const classroomService = {
   getAll: (): Classroom[] => {

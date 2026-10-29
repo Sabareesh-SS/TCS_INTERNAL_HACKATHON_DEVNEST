@@ -120,14 +120,10 @@ export const IncidentListPage: React.FC<IncidentListPageProps> = ({ onSelectInci
               onChange={(e) => setDeviceTypeFilter(e.target.value as DeviceType | 'all')}
               className="w-full bg-zinc-50 border border-zinc-200 rounded px-2.5 py-1.5 text-zinc-800 focus:bg-white focus:outline-none focus:border-zinc-400"
             >
-              <option value="all">All Devices</option>
-              <option value="projector">Projectors & Lasers</option>
-              <option value="microphone">Microphones & Audio</option>
-              <option value="smartboard">Interactive Displays</option>
-              <option value="ptz-camera">PTZ Cameras</option>
-              <option value="crestron">Automation Processors</option>
-              <option value="amplifier">Amplifiers & DSP</option>
-              <option value="switcher">Presentation Switchers</option>
+              <option value="all">All Categories</option>
+              <option value="projector">Projectors (Epson 3LCD)</option>
+              <option value="microphone">Microphones (Shure BLX24)</option>
+              <option value="smartboard">Interactive Displays (Promethean 9)</option>
             </select>
           </div>
 
@@ -160,7 +156,7 @@ export const IncidentListPage: React.FC<IncidentListPageProps> = ({ onSelectInci
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="INC-001, HDMI, EDID..."
+                placeholder="INC-2026-001, HDMI, EB-E01..."
                 className="w-full bg-zinc-50 border border-zinc-200 rounded pl-8 pr-2.5 py-1.5 text-zinc-800 placeholder:text-zinc-400 focus:bg-white focus:outline-none focus:border-zinc-400"
               />
             </div>

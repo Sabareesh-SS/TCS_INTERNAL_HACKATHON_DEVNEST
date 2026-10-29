@@ -137,14 +137,29 @@ const SEED_INCIDENTS: Incident[] = [
   },
 ];
 
-const STORAGE_KEY = 'tscai_incidents_data';
+const STORAGE_KEY = 'tscai_campus_incidents_v3';
+
+// Auto-purge any stale legacy dummy data from earlier browser runs
+if (typeof window !== 'undefined') {
+  try {
+    const legacyOld = localStorage.getItem('tscai_incidents_data');
+    if (legacyOld && (legacyOld.includes('INC-001') || legacyOld.includes('PT-MZ780') || legacyOld.includes('Sony') || legacyOld.includes('Crestron'))) {
+      localStorage.removeItem('tscai_incidents_data');
+    }
+  } catch {}
+}
 
 export const incidentService = {
   getAll: (): Incident[] => {
+    // Check and clean if stale legacy data is present
     const data = localStorage.getItem(STORAGE_KEY);
     if (data) {
       try {
-        return JSON.parse(data);
+        const parsed: Incident[] = JSON.parse(data);
+        const hasLegacy = parsed.some((i) => i.id === 'INC-001' || i.deviceModel?.includes('PT-MZ780') || i.classroomId === 'SCI-302');
+        if (!hasLegacy && parsed.length > 0) {
+          return parsed;
+        }
       } catch {
         // fallback
       }
@@ -345,37 +360,37 @@ export const incidentService = {
   createSimulatedIncident: (): Incident => {
     const list = incidentService.getAll();
     const newNumber = list.length + 1;
-    const newId = `INC-${String(newNumber).padStart(3, '0')}`;
+    const newId = `INC-2026-${String(newNumber).padStart(3, '0')}`;
     const newIncident: Incident = {
       id: newId,
       status: 'unassigned',
       priority: Math.random() > 0.5 ? 'critical' : 'high',
-      classroomId: 'AB-204',
-      classroomName: 'Academic Block A · Room 204',
-      deviceId: 'AV-P204-01',
-      deviceName: 'Main Auditorium Laser Projector',
+      classroomId: 'AB-105',
+      classroomName: 'Academic Block · Room 105',
+      deviceId: 'DEV004',
+      deviceName: 'Main Lecture Projector',
       deviceType: 'projector',
-      deviceModel: 'Panasonic PT-MZ780 (7,000 lm)',
+      deviceModel: 'Epson PowerLite EB-E01 (Demo DEMO-P02)',
       reportedBy: 'Faculty Alert (Automated RAG Triage)',
       reportedAt: 'Just now',
       updatedAt: 'Just now',
-      reportedSymptom: 'Auto-telemetry alert: EDID loss on HDBaseT receiver pin 19.',
+      reportedSymptom: 'Auto-telemetry alert: HDMI signal loss on wall plate port 1.',
       aiDiagnostic: {
-        confidenceScore: 92,
-        probableCauseHypothesis: 'Transmitter power brownout or cable unseated at podium junction.',
+        confidenceScore: 94,
+        probableCauseHypothesis: 'Input source mismatch or laptop external display mirror setting deactivated.',
         isHypothesisVerified: false,
-        lastStepAttempted: 'Faculty pressed input re-sync button on lectern panel.',
+        lastStepAttempted: 'Faculty pressed input re-sync button on podium plate.',
         attemptResult: 'Display sync timeout. HDMI Rx failed to lock pixel clock.',
         manualReference: {
-          manualTitle: 'Panasonic PT-MZ780 Operating Instructions Rev 3.2',
-          section: 'Section 4.3 — Signal Verification',
-          pageNumber: 42,
-          snippet: 'Check HPD pin voltage. Must measure greater than 4.8V DC.',
+          manualTitle: "Epson PowerLite EB-E01 User's Guide (CPD-59263)",
+          section: 'Solving Projector Problems - No Image Appears',
+          pageNumber: 104,
+          snippet: 'Confirm source device is awake; cycle Source Search or press HDMI on remote; verify external display mirror settings (Win+P).',
         },
-        recommendedNextAction: 'Field technician verify 5V bus and reset HDBaseT balun.',
+        recommendedNextAction: 'Field technician verify 5V line and test HDMI patch cord.',
         evidence: {
-          deviceModel: 'Panasonic PT-MZ780',
-          inputSource: 'HDBaseT Extender',
+          deviceModel: 'Epson PowerLite EB-E01',
+          inputSource: 'HDMI1 (Wall Plate)',
           reportedCableState: 'Connected',
           edidHandshake: 'Failed',
           hdcpStatus: 'Inactive',
