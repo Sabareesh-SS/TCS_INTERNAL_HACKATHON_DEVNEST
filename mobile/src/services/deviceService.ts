@@ -1,11 +1,39 @@
 import { Device, DeviceStatus } from '../types/device';
 import { MOCK_DEVICES } from './mockData';
 import { supabase, isLiveBackendAvailable } from './supabaseClient';
+import { AI_ENGINE_URL } from './diagnosticService';
 
 class DeviceService {
   private devices: Device[] = [...MOCK_DEVICES];
 
   public async getDeviceById(id: string): Promise<Device | null> {
+    try {
+      const res = await fetch(`${AI_ENGINE_URL}/api/inventory/scan/${encodeURIComponent(id)}`, {
+        signal: AbortSignal.timeout(3000),
+      });
+      if (res.ok) {
+        const data = await res.json();
+        const d = data.device;
+        if (d) {
+          const cls = data.classroom || {};
+          return {
+            id: d.device_id || d.id,
+            classroomId: d.classroom_id || cls.classroom_id || 'CLS-GEN',
+            classroomName: cls.room_no ? `Room ${cls.room_no} (${cls.block || 'Campus'})` : undefined,
+            deviceType: (d.device_type?.toLowerCase() || 'projector') as any,
+            manufacturer: d.manufacturer || 'OEM',
+            modelNumber: d.model || d.model_number || 'Model',
+            assetTag: d.asset_id || d.asset_tag || d.device_id,
+            serialNumber: d.device_qr_id || d.serial_number || 'SN-UNKNOWN',
+            status: d.device_status === 'ACTIVE' ? 'operational' : 'faulty',
+            manualUrl: d.manual_url !== 'NOT_AVAILABLE' ? d.manual_url : undefined,
+          };
+        }
+      }
+    } catch {
+      // Fall through
+    }
+
     if (isLiveBackendAvailable && supabase) {
       const { data, error } = await supabase.from('devices').select('*, classrooms(room_number, building)').eq('id', id).single();
       if (!error && data) {

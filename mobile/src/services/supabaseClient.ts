@@ -2,13 +2,17 @@ import { createClient, SupabaseClient } from '@supabase/supabase-js';
 
 declare const process: { env: Record<string, string | undefined> };
 
-// Configuration placeholders or injected via environment variables
-export const SUPABASE_URL = process.env.SUPABASE_URL || 'https://example-placeholder-smart-av.supabase.co';
-export const SUPABASE_ANON_KEY = process.env.SUPABASE_ANON_KEY || 'example-anon-key-placeholder';
+// Supabase Cloud Configuration (configured for campus AV platform)
+export const SUPABASE_URL =
+  process.env.SUPABASE_URL || 'https://xhygvotlbrmsjlqinehr.supabase.co';
+export const SUPABASE_ANON_KEY =
+  process.env.SUPABASE_ANON_KEY ||
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhoeWd2b3RsYnJtc2pscWluZWhyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTMyNjAxMDksImV4cCI6MjEwODgzNjEwOX0.2t-x5DJo77Ho7KSmAK9ezRVga_rqcJSgpeI3o_XOxbY';
 
 const isSupabaseConfigured =
-  SUPABASE_URL !== 'https://example-placeholder-smart-av.supabase.co' &&
-  SUPABASE_ANON_KEY !== 'example-anon-key-placeholder';
+  Boolean(SUPABASE_URL) &&
+  Boolean(SUPABASE_ANON_KEY) &&
+  !SUPABASE_URL.includes('example-placeholder');
 
 let supabaseInstance: SupabaseClient | null = null;
 

@@ -3,8 +3,11 @@
  * Compatible with Supabase JS client and local offline mock for demo / development.
  */
 
-export const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL || 'https://mock-campus-av.supabase.co';
-export const SUPABASE_ANON_KEY = import.meta.env.VITE_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.mock-key';
+export const SUPABASE_URL =
+  import.meta.env.VITE_SUPABASE_URL || 'https://xhygvotlbrmsjlqinehr.supabase.co';
+export const SUPABASE_ANON_KEY =
+  import.meta.env.VITE_SUPABASE_ANON_KEY ||
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhoeWd2b3RsYnJtc2pscWluZWhyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTMyNjAxMDksImV4cCI6MjEwODgzNjEwOX0.2t-x5DJo77Ho7KSmAK9ezRVga_rqcJSgpeI3o_XOxbY';
 
 export interface RealtimeSubscription {
   unsubscribe: () => void;

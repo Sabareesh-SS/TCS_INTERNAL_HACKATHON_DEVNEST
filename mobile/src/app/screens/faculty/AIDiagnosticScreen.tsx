@@ -47,6 +47,28 @@ export const AIDiagnosticScreen: React.FC<AIDiagnosticScreenProps> = ({
             setTicketId(inc.ticketId || null);
           } else {
             setCurrentStepIndex(Math.min(completedCount, inc.diagnosticSteps.length - 1));
+
+            // Fetch live OEM benchmark RAG step from AI engine
+            diagnosticService.fetchNextStepFromAI({
+              incident_id: inc.id,
+              device_id: inc.deviceId,
+              device_type: inc.deviceType,
+              symptom: inc.symptomCategory || inc.symptomDescription,
+              power_status: inc.initialCheckPower ? 'ON' : 'OFF',
+              cable_status: inc.initialCheckCable ? 'CONNECTED' : 'DISCONNECTED',
+              step_number: 1,
+            }).then(aiRes => {
+              if (aiRes.step && inc.diagnosticSteps.length > 0) {
+                inc.diagnosticSteps[0] = {
+                  ...inc.diagnosticSteps[0],
+                  actionTitle: aiRes.step.actionTitle,
+                  instructionText: aiRes.step.instructionText,
+                  manualReference: aiRes.step.manualReference || inc.diagnosticSteps[0].manualReference,
+                  verificationPrompt: aiRes.step.verificationPrompt || inc.diagnosticSteps[0].verificationPrompt,
+                };
+                setIncident({ ...inc });
+              }
+            }).catch(() => {});
           }
         }
       } finally {
@@ -69,6 +91,18 @@ export const AIDiagnosticScreen: React.FC<AIDiagnosticScreenProps> = ({
     try {
       await incidentService.recordStepResponse(incident.id, currentStep.stepNumber, 'worked');
       await incidentService.resolveIncidentByFaculty(incident.id);
+
+      // Notify AI Engine of resolution
+      diagnosticService.fetchNextStepFromAI({
+        incident_id: incident.id,
+        device_id: incident.deviceId,
+        device_type: incident.deviceType,
+        symptom: incident.symptomCategory || incident.symptomDescription,
+        previous_action_id: currentStep.actionTitle,
+        previous_step_result: 'SUCCESS',
+        step_number: currentStep.stepNumber,
+      }).catch(() => {});
+
       setOutcome('RESOLVED');
     } finally {
       setIsProcessingAction(false);
@@ -81,18 +115,40 @@ export const AIDiagnosticScreen: React.FC<AIDiagnosticScreenProps> = ({
     try {
       await incidentService.recordStepResponse(incident.id, currentStep.stepNumber, 'did_not_work');
 
-      const evaluation = diagnosticService.evaluateStepOutcome(
-        currentStepIndex,
-        steps.length,
-        'did_not_work'
-      );
+      const nextStepNum = currentStep.stepNumber + 1;
+      const aiResult = await diagnosticService.fetchNextStepFromAI({
+        incident_id: incident.id,
+        device_id: incident.deviceId,
+        device_type: incident.deviceType,
+        symptom: incident.symptomCategory || incident.symptomDescription,
+        power_status: incident.initialCheckPower ? 'ON' : 'OFF',
+        cable_status: incident.initialCheckCable ? 'CONNECTED' : 'DISCONNECTED',
+        previous_action_id: currentStep.actionTitle,
+        previous_step_result: 'FAILED',
+        step_number: nextStepNum,
+      });
 
-      if (evaluation === 'ESCALATE') {
+      if (aiResult.status === 'ESCALATED' || aiResult.escalationRecommended) {
         const escalated = await incidentService.escalateToTechnician(incident.id, 'high');
         setTicketId(escalated?.ticketId || null);
         setOutcome('ESCALATED');
       } else {
-        setCurrentStepIndex(prev => prev + 1);
+        if (currentStepIndex + 1 < steps.length) {
+          if (aiResult.step) {
+            steps[currentStepIndex + 1] = {
+              ...steps[currentStepIndex + 1],
+              actionTitle: aiResult.step.actionTitle,
+              instructionText: aiResult.step.instructionText,
+              manualReference: aiResult.step.manualReference || steps[currentStepIndex + 1].manualReference,
+              verificationPrompt: aiResult.step.verificationPrompt || steps[currentStepIndex + 1].verificationPrompt,
+            };
+          }
+          setCurrentStepIndex(prev => prev + 1);
+        } else {
+          const escalated = await incidentService.escalateToTechnician(incident.id, 'high');
+          setTicketId(escalated?.ticketId || null);
+          setOutcome('ESCALATED');
+        }
       }
     } finally {
       setIsProcessingAction(false);

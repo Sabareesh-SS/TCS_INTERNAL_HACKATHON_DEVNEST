@@ -67,8 +67,20 @@ export const IncidentProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     setIncidents(incidentService.getAll());
   }, []);
 
-  // Realtime subscription setup
+  // Realtime subscription setup & backend synchronization
   useEffect(() => {
+    // Initial sync from backend
+    incidentService.syncFromBackend().then(() => {
+      refreshIncidents();
+    });
+
+    // Periodic synchronization to capture faculty reports & AI escalations
+    const pollInterval = setInterval(() => {
+      incidentService.syncFromBackend().then(() => {
+        refreshIncidents();
+      });
+    }, 4000);
+
     const channel = mockRealtimeHub.incidentChannel;
     channel.on('*', (payload) => {
       refreshIncidents();
@@ -86,7 +98,7 @@ export const IncidentProvider: React.FC<{ children: React.ReactNode }> = ({ chil
     });
 
     return () => {
-      // cleanup
+      clearInterval(pollInterval);
     };
   }, [refreshIncidents]);
 

@@ -19,3 +19,22 @@ async def resolve_qr_code(qr_id: str = Path(..., description="Scanned QR code ID
         )
     return result
 
+
+@router.get("/classrooms")
+async def list_classrooms():
+    """Returns all campus classrooms."""
+    return inventory_service.list_classrooms()
+
+
+@router.get("/devices")
+async def list_devices():
+    """Returns all registered AV devices."""
+    return inventory_service.list_devices()
+
+
+@router.get("/classroom/{classroom_id}/devices")
+async def get_classroom_devices(classroom_id: str):
+    """Returns all devices located inside a specific classroom."""
+    devices = inventory_service.get_classroom_devices(classroom_id)
+    return devices
+

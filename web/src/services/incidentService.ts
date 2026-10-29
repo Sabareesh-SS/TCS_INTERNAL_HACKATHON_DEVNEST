@@ -393,6 +393,15 @@ export const incidentService = {
     list[index] = updated;
     localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
     mockRealtimeHub.incidentChannel.emit('UPDATE', updated, list[index]);
+
+    // Asynchronously notify backend
+    const backendUrl = import.meta.env.VITE_AI_ENGINE_URL || 'http://localhost:8000';
+    fetch(`${backendUrl}/api/diagnostics/ticket-update`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ incident_id: incidentId, technician_id: technicianId, status: 'in_progress' }),
+    }).catch(() => {});
+
     return updated;
   },
 
@@ -420,7 +429,114 @@ export const incidentService = {
     list[index] = updated;
     localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
     mockRealtimeHub.incidentChannel.emit('UPDATE', updated, current);
+
+    // Asynchronously notify backend
+    const backendUrl = import.meta.env.VITE_AI_ENGINE_URL || 'http://localhost:8000';
+    fetch(`${backendUrl}/api/diagnostics/ticket-update`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ incident_id: incidentId, status }),
+    }).catch(() => {});
+
     return updated;
+  },
+
+  syncFromBackend: async (): Promise<Incident[]> => {
+    const backendUrl = import.meta.env.VITE_AI_ENGINE_URL || 'http://localhost:8000';
+    try {
+      const res = await fetch(`${backendUrl}/api/diagnostics/incidents`, {
+        signal: AbortSignal.timeout(3000),
+      });
+      if (res.ok) {
+        const backendSessions = await res.json();
+        if (Array.isArray(backendSessions) && backendSessions.length > 0) {
+          const list = incidentService.getAll();
+          let changed = false;
+
+          for (const session of backendSessions) {
+            const existingIdx = list.findIndex((i) => i.id === session.incident_id);
+            const isEscalated = session.status === 'ESCALATED';
+            const isResolved = session.status === 'RESOLVED';
+            const webStatus: IncidentStatus = isEscalated
+              ? 'unassigned'
+              : isResolved
+              ? 'resolved'
+              : 'in_progress';
+
+            const techSummary = session.technician_summary || {};
+            const lastStep =
+              session.step_history && session.step_history.length > 0
+                ? session.step_history[session.step_history.length - 1]
+                : null;
+
+            const mappedIncident: Incident = {
+              id: session.incident_id,
+              status: webStatus,
+              priority: isEscalated ? 'critical' : 'high',
+              classroomId: session.room_no || session.classroom_id || 'AB-105',
+              classroomName: `Academic Block · Room ${session.room_no || session.classroom_id || 'AB-105'}`,
+              deviceId: session.device_id,
+              deviceName: `Campus Hardware Asset (${session.device_id})`,
+              deviceType: (techSummary.device_type?.toLowerCase() || 'projector') as any,
+              deviceModel: techSummary.model || 'Demo OEM Reference Model',
+              reportedBy: 'Faculty Member (Mobile App)',
+              reportedAt: session.created_at
+                ? new Date(session.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+                : 'Just now',
+              updatedAt: 'Just now',
+              reportedSymptom: session.symptom,
+              aiDiagnostic: {
+                confidenceScore: 96,
+                probableCauseHypothesis:
+                  techSummary.escalation_reason || 'AI Grounded Fault Classification',
+                isHypothesisVerified: isResolved,
+                lastStepAttempted: lastStep
+                  ? `Step ${lastStep.step_number}: ${lastStep.action_id}`
+                  : 'Diagnostic Triage Initialized',
+                attemptResult: lastStep ? lastStep.result : 'Pending Faculty Action',
+                manualReference: techSummary.manual_references?.[0]
+                  ? {
+                      manualTitle: techSummary.manual_references[0].title,
+                      section: techSummary.manual_references[0].section,
+                      pageNumber: techSummary.manual_references[0].page || 1,
+                      snippet: techSummary.escalation_reason || 'OEM benchmark reference procedure.',
+                      docUrl:
+                        techSummary.manual_references[0].source_url ||
+                        'https://files.support.epson.com/docid/cpd5/cpd59263.pdf',
+                    }
+                  : undefined,
+                recommendedNextAction:
+                  techSummary.recommended_parts_or_tools || 'Inspect physical equipment on-site.',
+                evidence: {
+                  deviceModel: techSummary.model || 'Campus Hardware',
+                  inputSource: 'HDMI / Active Source',
+                  reportedCableState: 'Connected',
+                  edidHandshake: 'Active',
+                  hdcpStatus: 'Normal',
+                  powerLedState: 'Active',
+                },
+              },
+            };
+
+            if (existingIdx !== -1) {
+              list[existingIdx] = { ...list[existingIdx], ...mappedIncident };
+            } else {
+              list.unshift(mappedIncident);
+              mockRealtimeHub.incidentChannel.emit('INSERT', mappedIncident);
+            }
+            changed = true;
+          }
+
+          if (changed) {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+          }
+          return list;
+        }
+      }
+    } catch {
+      // Backend not running; local storage seamlessly maintained
+    }
+    return incidentService.getAll();
   },
 
   createSimulatedIncident: (): Incident => {

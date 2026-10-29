@@ -35,22 +35,36 @@ class InventoryService:
     def resolve_qr(self, qr_code_or_id: str) -> Optional[Dict[str, Any]]:
         """
         Resolves a scanned QR code (classroom or device) or asset/device ID.
+        Supports prefixes (classroom:, device:), JSON payloads, asset tags, and IDs.
         """
         code = qr_code_or_id.strip()
 
-        # 1. Check if it matches a Device QR or device_id
+        # Handle prefix parsing and JSON payloads
+        if code.lower().startswith("classroom:"):
+            code = code[len("classroom:"):].strip()
+        elif code.lower().startswith("device:"):
+            code = code[len("device:"):].strip()
+        elif code.startswith("{") and code.endswith("}"):
+            try:
+                import json
+                parsed = json.loads(code)
+                code = str(parsed.get("id") or parsed.get("targetId") or code).strip()
+            except Exception:
+                pass
+
+        # 1. Check if it matches a Device QR or device_id or asset_id (case-insensitive)
         if not self.devices_df.empty:
             dev_match = (
-                (self.devices_df["device_qr_id"] == code) |
-                (self.devices_df["device_id"] == code) |
-                (self.devices_df["asset_id"] == code)
+                (self.devices_df["device_qr_id"].str.upper() == code.upper()) |
+                (self.devices_df["device_id"].str.upper() == code.upper()) |
+                (self.devices_df["asset_id"].str.upper() == code.upper())
             )
             if dev_match.any():
                 dev_row = self.devices_df[dev_match].iloc[0].to_dict()
                 # Find matching classroom
                 cls_info = {}
                 if not self.classrooms_df.empty:
-                    c_match = self.classrooms_df["classroom_id"] == dev_row.get("classroom_id")
+                    c_match = self.classrooms_df["classroom_id"].str.upper() == str(dev_row.get("classroom_id")).upper()
                     if c_match.any():
                         cls_info = self.classrooms_df[c_match].iloc[0].to_dict()
 
@@ -60,19 +74,19 @@ class InventoryService:
                     "classroom": cls_info
                 }
 
-        # 2. Check if it matches a Classroom QR or classroom_id / room_no
+        # 2. Check if it matches a Classroom QR or classroom_id / room_no (case-insensitive)
         if not self.classrooms_df.empty:
             cls_match = (
-                (self.classrooms_df["classroom_qr_id"] == code) |
-                (self.classrooms_df["classroom_id"] == code) |
-                (self.classrooms_df["room_no"] == code)
+                (self.classrooms_df["classroom_qr_id"].str.upper() == code.upper()) |
+                (self.classrooms_df["classroom_id"].str.upper() == code.upper()) |
+                (self.classrooms_df["room_no"].str.upper() == code.upper())
             )
             if cls_match.any():
                 cls_row = self.classrooms_df[cls_match].iloc[0].to_dict()
                 # Find all devices in this classroom
                 room_devices = []
                 if not self.devices_df.empty:
-                    d_match = self.devices_df["classroom_id"] == cls_row.get("classroom_id")
+                    d_match = self.devices_df["classroom_id"].str.upper() == str(cls_row.get("classroom_id")).upper()
                     if d_match.any():
                         room_devices = self.devices_df[d_match].to_dict(orient="records")
 
@@ -83,4 +97,23 @@ class InventoryService:
                 }
 
         return None
+
+    def list_classrooms(self) -> List[Dict[str, Any]]:
+        if self.classrooms_df.empty:
+            return []
+        return self.classrooms_df.to_dict(orient="records")
+
+    def list_devices(self) -> List[Dict[str, Any]]:
+        if self.devices_df.empty:
+            return []
+        return self.devices_df.to_dict(orient="records")
+
+    def get_classroom_devices(self, classroom_id: str) -> List[Dict[str, Any]]:
+        if self.devices_df.empty:
+            return []
+        cid = classroom_id.strip().upper()
+        match = (self.devices_df["classroom_id"].str.upper() == cid) | (self.devices_df["room_no"].str.upper() == cid)
+        if match.any():
+            return self.devices_df[match].to_dict(orient="records")
+        return []
 

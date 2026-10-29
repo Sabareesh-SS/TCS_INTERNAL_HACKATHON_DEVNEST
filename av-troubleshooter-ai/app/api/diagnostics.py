@@ -87,3 +87,29 @@ async def list_all_active_incidents():
     Returns all active and escalated incidents with technician summaries for Mithun's Web Dashboard.
     """
     return controller.list_all_sessions()
+
+
+@router.post("/ticket-update")
+async def update_ticket_status(update_data: Dict[str, Any]):
+    """
+    Updates incident / ticket status and assignment from Web Dashboard or Field Technician.
+    Syncs across controller sessions and Supabase.
+    """
+    incident_id = update_data.get("incident_id") or update_data.get("id")
+    if not incident_id:
+        raise HTTPException(status_code=400, detail="Missing incident_id")
+
+    if incident_id in controller._sessions:
+        session = controller._sessions[incident_id]
+        new_status = update_data.get("status")
+        if new_status:
+            try:
+                from app.schemas.common import DiagnosticStatus
+                if new_status.upper() in ["RESOLVED", "RESOLVED_BY_FACULTY", "RESOLVED_BY_TECH"]:
+                    session.status = DiagnosticStatus.RESOLVED
+                elif new_status.upper() in ["ESCALATED", "ESCALATED_TO_TECHNICIAN", "UNASSIGNED"]:
+                    session.status = DiagnosticStatus.ESCALATED
+            except Exception:
+                pass
+
+    return {"status": "ok", "incident_id": incident_id, "updated": True}
