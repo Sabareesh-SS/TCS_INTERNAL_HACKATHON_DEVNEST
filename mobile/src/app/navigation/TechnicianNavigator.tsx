@@ -29,24 +29,35 @@ function TechnicianRepairsStack() {
   );
 }
 
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { NavIcon } from '../../components/NavIcon';
+
 export const TechnicianNavigator: React.FC = () => {
+  const insets = useSafeAreaInsets();
+
   return (
     <Tab.Navigator
       screenOptions={{
         headerShown: false,
-        tabBarStyle: styles.tabBar,
+        tabBarStyle: [
+          styles.tabBar,
+          {
+            height: 56 + Math.max(insets.bottom, 6),
+            paddingBottom: Math.max(insets.bottom, 6),
+          },
+        ],
         tabBarActiveTintColor: colors.primary,
         tabBarInactiveTintColor: colors.textMuted,
-        tabBarShowLabel: true,
       }}
     >
       <Tab.Screen
         name="RepairsTab"
         component={TechnicianRepairsStack}
         options={{
+          tabBarIcon: ({ color, focused }) => <NavIcon name="console" color={color} focused={focused} />,
           tabBarLabel: ({ focused }) => (
             <Text style={[styles.tabLabel, focused ? styles.tabLabelActive : styles.tabLabelInactive]}>
-              [CONSOLE]
+              CONSOLE
             </Text>
           ),
         }}
@@ -55,9 +66,10 @@ export const TechnicianNavigator: React.FC = () => {
         name="QueueTab"
         component={AssignedTicketsScreen}
         options={{
+          tabBarIcon: ({ color, focused }) => <NavIcon name="tickets" color={color} focused={focused} />,
           tabBarLabel: ({ focused }) => (
             <Text style={[styles.tabLabel, focused ? styles.tabLabelActive : styles.tabLabelInactive]}>
-              [TICKETS]
+              TICKETS
             </Text>
           ),
         }}
@@ -66,9 +78,10 @@ export const TechnicianNavigator: React.FC = () => {
         name="TechNotificationsTab"
         component={NotificationsScreen}
         options={{
+          tabBarIcon: ({ color, focused }) => <NavIcon name="alerts" color={color} focused={focused} />,
           tabBarLabel: ({ focused }) => (
             <Text style={[styles.tabLabel, focused ? styles.tabLabelActive : styles.tabLabelInactive]}>
-              [ALERTS]
+              ALERTS
             </Text>
           ),
         }}
@@ -77,9 +90,10 @@ export const TechnicianNavigator: React.FC = () => {
         name="TechProfileTab"
         component={ProfileScreen}
         options={{
+          tabBarIcon: ({ color, focused }) => <NavIcon name="profile" color={color} focused={focused} />,
           tabBarLabel: ({ focused }) => (
             <Text style={[styles.tabLabel, focused ? styles.tabLabelActive : styles.tabLabelInactive]}>
-              [PROFILE]
+              PROFILE
             </Text>
           ),
         }}
@@ -93,19 +107,22 @@ const styles = StyleSheet.create({
     backgroundColor: colors.card,
     borderTopWidth: 1,
     borderTopColor: colors.border,
-    height: 56,
-    paddingBottom: 6,
+    height: 60,
+    paddingBottom: 8,
     paddingTop: 6,
   },
   tabLabel: {
     ...typography.badge,
     fontSize: 9,
-    marginTop: 4,
+    marginTop: 2,
+    letterSpacing: 0.5,
   },
   tabLabelActive: {
     color: colors.primary,
+    fontWeight: '700',
   },
   tabLabelInactive: {
     color: colors.textMuted,
+    fontWeight: '500',
   },
 });

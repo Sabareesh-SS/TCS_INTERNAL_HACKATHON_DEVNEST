@@ -8,6 +8,7 @@ import {
   Platform,
   TouchableOpacity,
 } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { colors } from '../../../theme/colors';
 import { typography } from '../../../theme/typography';
 import { borderRadius, spacing, layout } from '../../../theme/spacing';
@@ -21,6 +22,7 @@ interface LoginScreenProps {
 }
 
 export const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
+  const insets = useSafeAreaInsets();
   const { login, isLoading, error } = useAuth();
   const [email, setEmail] = useState('dr.sharma@campus.edu');
   const [password, setPassword] = useState('password123');
@@ -60,7 +62,16 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
       style={styles.container}
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}
     >
-      <ScrollView contentContainerStyle={styles.scrollContent} keyboardShouldPersistTaps="handled">
+      <ScrollView
+        contentContainerStyle={[
+          styles.scrollContent,
+          {
+            paddingTop: Math.max(insets.top, spacing.lg) + spacing.md,
+            paddingBottom: Math.max(insets.bottom, spacing.lg) + spacing.md,
+          },
+        ]}
+        keyboardShouldPersistTaps="handled"
+      >
         {/* Institutional Authority Header */}
         <View style={styles.header}>
           <View style={styles.institutionBadge}>

@@ -32,6 +32,19 @@ function FacultyHomeStack() {
   );
 }
 
+function FacultyScanStack() {
+  return (
+    <Stack.Navigator screenOptions={{ headerShown: false, animation: 'slide_from_right' }}>
+      <Stack.Screen name="QRScannerView" component={QRScannerScreen} />
+      <Stack.Screen name="ClassroomInventory" component={ClassroomInventoryScreen} />
+      <Stack.Screen name="DeviceDetails" component={DeviceDetailsScreen} />
+      <Stack.Screen name="ReportFault" component={ReportFaultScreen} />
+      <Stack.Screen name="AIDiagnostic" component={AIDiagnosticScreen} />
+      <Stack.Screen name="IncidentDetails" component={IncidentDetailsScreen} />
+    </Stack.Navigator>
+  );
+}
+
 function FacultyIncidentsStack() {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false, animation: 'slide_from_right' }}>
@@ -42,35 +55,47 @@ function FacultyIncidentsStack() {
   );
 }
 
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { NavIcon } from '../../components/NavIcon';
+
 export const FacultyNavigator: React.FC = () => {
+  const insets = useSafeAreaInsets();
+
   return (
     <Tab.Navigator
       screenOptions={{
         headerShown: false,
-        tabBarStyle: styles.tabBar,
+        tabBarStyle: [
+          styles.tabBar,
+          {
+            height: 56 + Math.max(insets.bottom, 6),
+            paddingBottom: Math.max(insets.bottom, 6),
+          },
+        ],
         tabBarActiveTintColor: colors.primary,
         tabBarInactiveTintColor: colors.textMuted,
-        tabBarShowLabel: true,
       }}
     >
       <Tab.Screen
         name="HomeTab"
         component={FacultyHomeStack}
         options={{
+          tabBarIcon: ({ color, focused }) => <NavIcon name="home" color={color} focused={focused} />,
           tabBarLabel: ({ focused }) => (
             <Text style={[styles.tabLabel, focused ? styles.tabLabelActive : styles.tabLabelInactive]}>
-              [HOME]
+              HOME
             </Text>
           ),
         }}
       />
       <Tab.Screen
         name="ScanTab"
-        component={QRScannerScreen}
+        component={FacultyScanStack}
         options={{
+          tabBarIcon: ({ color, focused }) => <NavIcon name="scan" color={color} focused={focused} />,
           tabBarLabel: ({ focused }) => (
             <Text style={[styles.tabLabel, focused ? styles.tabLabelActive : styles.tabLabelInactive]}>
-              [SCAN QR]
+              SCAN QR
             </Text>
           ),
         }}
@@ -79,9 +104,10 @@ export const FacultyNavigator: React.FC = () => {
         name="IncidentsTab"
         component={FacultyIncidentsStack}
         options={{
+          tabBarIcon: ({ color, focused }) => <NavIcon name="incidents" color={color} focused={focused} />,
           tabBarLabel: ({ focused }) => (
             <Text style={[styles.tabLabel, focused ? styles.tabLabelActive : styles.tabLabelInactive]}>
-              [INCIDENTS]
+              INCIDENTS
             </Text>
           ),
         }}
@@ -90,9 +116,10 @@ export const FacultyNavigator: React.FC = () => {
         name="NotificationsTab"
         component={NotificationsScreen}
         options={{
+          tabBarIcon: ({ color, focused }) => <NavIcon name="alerts" color={color} focused={focused} />,
           tabBarLabel: ({ focused }) => (
             <Text style={[styles.tabLabel, focused ? styles.tabLabelActive : styles.tabLabelInactive]}>
-              [ALERTS]
+              ALERTS
             </Text>
           ),
         }}
@@ -101,9 +128,10 @@ export const FacultyNavigator: React.FC = () => {
         name="ProfileTab"
         component={ProfileScreen}
         options={{
+          tabBarIcon: ({ color, focused }) => <NavIcon name="profile" color={color} focused={focused} />,
           tabBarLabel: ({ focused }) => (
             <Text style={[styles.tabLabel, focused ? styles.tabLabelActive : styles.tabLabelInactive]}>
-              [PROFILE]
+              PROFILE
             </Text>
           ),
         }}
@@ -117,19 +145,22 @@ const styles = StyleSheet.create({
     backgroundColor: colors.card,
     borderTopWidth: 1,
     borderTopColor: colors.border,
-    height: 56,
-    paddingBottom: 6,
+    height: 60,
+    paddingBottom: 8,
     paddingTop: 6,
   },
   tabLabel: {
     ...typography.badge,
     fontSize: 9,
-    marginTop: 4,
+    marginTop: 2,
+    letterSpacing: 0.5,
   },
   tabLabelActive: {
     color: colors.primary,
+    fontWeight: '700',
   },
   tabLabelInactive: {
     color: colors.textMuted,
+    fontWeight: '500',
   },
 });

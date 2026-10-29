@@ -13,9 +13,9 @@ interface StatusBadgeProps {
 export const StatusBadge: React.FC<StatusBadgeProps> = ({ status, size = 'sm', style }) => {
   const norm = (status || '').toLowerCase().replace(/_/g, ' ');
 
-  let bg = colors.surfaceSecondary;
-  let text = colors.textSecondary;
-  let border = colors.border;
+  let bg: string = colors.surfaceSecondary;
+  let text: string = colors.textSecondary;
+  let border: string = colors.border;
   let label = status.toUpperCase();
 
   switch (norm) {

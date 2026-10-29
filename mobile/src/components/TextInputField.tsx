@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, StyleSheet, TextInputProps, ViewStyle } from 'react-native';
+import { View, Text, TextInput, StyleSheet, TextInputProps, ViewStyle, TextStyle } from 'react-native';
 import { colors } from '../theme/colors';
 import { typography } from '../theme/typography';
 import { borderRadius, layout, spacing } from '../theme/spacing';
 
-interface TextInputFieldProps extends TextInputProps {
+export interface TextInputFieldProps extends TextInputProps {
   label?: string;
   error?: string | null;
   helperText?: string;
   containerStyle?: ViewStyle;
+  style?: TextStyle | TextStyle[];
 }
 
 export const TextInputField: React.FC<TextInputFieldProps> = ({
@@ -17,6 +18,7 @@ export const TextInputField: React.FC<TextInputFieldProps> = ({
   helperText,
   containerStyle,
   style,
+  editable,
   onFocus,
   onBlur,
   ...props
@@ -32,11 +34,12 @@ export const TextInputField: React.FC<TextInputFieldProps> = ({
           typography.bodyMedium,
           {
             borderColor: error ? colors.danger : isFocused ? colors.borderDark : colors.border,
-            backgroundColor: props.editable === false ? colors.surfaceSecondary : colors.card,
+            backgroundColor: editable === false ? colors.surfaceSecondary : colors.card,
           },
           style,
         ]}
         placeholderTextColor={colors.textMuted}
+        editable={editable}
         onFocus={e => {
           setIsFocused(true);
           onFocus && onFocus(e);
