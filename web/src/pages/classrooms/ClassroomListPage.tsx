@@ -49,20 +49,9 @@ export const ClassroomListPage: React.FC<ClassroomListPageProps> = ({ onSelectRo
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-zinc-200">
         <div>
-          <div className="flex items-center gap-2">
-            <span className="text-xs font-mono uppercase px-2 py-0.5 rounded bg-zinc-100 border border-zinc-200 text-zinc-700 font-semibold">
-              Campus Facilities
-            </span>
-            <span className="text-xs font-mono text-zinc-500">
-              {classrooms.length} Registered Rooms
-            </span>
-          </div>
-          <h2 className="text-xl sm:text-2xl font-bold text-zinc-900 mt-1">
+          <h2 className="text-xl sm:text-2xl font-bold text-zinc-900">
             Classrooms & Lecture Halls
           </h2>
-          <p className="text-xs sm:text-sm text-zinc-600">
-            Browse campus learning spaces, doorway QR entrance tags, and active AV health status
-          </p>
         </div>
 
         {isAdmin && (

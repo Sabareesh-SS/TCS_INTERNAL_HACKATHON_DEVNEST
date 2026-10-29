@@ -3,7 +3,7 @@ import { useIncidents } from '../../context/IncidentContext';
 import { IncidentTable } from '../../components/IncidentTable';
 import { IncidentPriority } from '../../types/incident';
 import { DeviceType } from '../../types/device';
-import { Search, RotateCcw, Zap } from 'lucide-react';
+import { Search, RotateCcw } from 'lucide-react';
 import { classroomService } from '../../services/classroomService';
 
 interface IncidentListPageProps {
@@ -24,7 +24,6 @@ export const IncidentListPage: React.FC<IncidentListPageProps> = ({ onSelectInci
     roomFilter,
     setRoomFilter,
     assignIncident,
-    triggerSimulatedAlert,
     metrics,
   } = useIncidents();
 
@@ -45,35 +44,12 @@ export const IncidentListPage: React.FC<IncidentListPageProps> = ({ onSelectInci
 
   return (
     <div className="p-4 sm:p-6 lg:p-8 space-y-6 max-w-7xl mx-auto">
-      {/* Header & Live Queue Banner */}
+      {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-zinc-200">
         <div>
-          <div className="flex items-center gap-2">
-            <span className="text-xs font-mono uppercase px-2 py-0.5 rounded bg-zinc-100 border border-zinc-200 text-zinc-700 font-semibold">
-              Live Dispatch Queue
-            </span>
-            <span className="text-xs font-mono text-emerald-600 flex items-center gap-1 font-semibold">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-              Realtime Active
-            </span>
-          </div>
-          <h2 className="text-xl sm:text-2xl font-bold text-zinc-900 mt-1">
+          <h2 className="text-xl sm:text-2xl font-bold text-zinc-900">
             Incident Queue
           </h2>
-          <p className="text-xs sm:text-sm text-zinc-600">
-            Real-time feed of campus AV tickets with AI-grounded troubleshooting steps
-          </p>
-        </div>
-
-        <div className="flex items-center gap-2 shrink-0">
-          <button
-            onClick={triggerSimulatedAlert}
-            className="flex items-center gap-1.5 px-3 py-2 text-xs font-mono rounded bg-zinc-100 hover:bg-zinc-200 border border-zinc-200 text-zinc-800 font-medium transition-colors"
-            title="Inject simulated telemetry fault into the live feed"
-          >
-            <Zap className="w-3.5 h-3.5 text-amber-500" />
-            Simulate Incoming Ticket
-          </button>
         </div>
       </div>
 

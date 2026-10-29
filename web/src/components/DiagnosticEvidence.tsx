@@ -17,43 +17,15 @@ export const DiagnosticEvidence: React.FC<DiagnosticEvidenceProps> = ({
 
   return (
     <div className="rounded-lg border border-zinc-200 bg-white p-5 space-y-5 shadow-xs">
-      {/* AI Header & Confidence */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-zinc-200">
-        <div className="flex items-center gap-2.5">
-          <div className="p-1.5 rounded bg-sky-50 border border-sky-200 text-sky-700">
-            <Sparkles className="w-4 h-4" />
-          </div>
-          <div>
-            <div className="flex items-center gap-2">
-              <h3 className="text-sm font-bold text-zinc-900 uppercase tracking-wide">
-                AI Diagnostic Summary & RAG Grounding
-              </h3>
-              <span className="text-[10px] font-mono px-1.5 py-0.5 rounded bg-zinc-100 border border-zinc-200 text-zinc-700 font-semibold">
-                Claude 3.5 Sonnet + RAG Engine
-              </span>
-            </div>
-            <p className="text-xs text-zinc-500 font-sans">
-              Grounded in verified vendor technical manuals & reported symptoms
-            </p>
-          </div>
+      {/* AI Header */}
+      <div className="flex items-center gap-2.5 pb-4 border-b border-zinc-200">
+        <div className="p-1.5 rounded bg-sky-50 border border-sky-200 text-sky-700">
+          <Sparkles className="w-4 h-4" />
         </div>
-
-        {/* Confidence Meter */}
-        <div className="flex items-center gap-3 bg-zinc-50 border border-zinc-200 px-3 py-1.5 rounded">
-          <div className="text-right">
-            <span className="text-[10px] font-mono uppercase text-zinc-500 block font-semibold">
-              Model Confidence
-            </span>
-            <span className="text-xs font-mono font-bold text-sky-700">
-              {diagnostic.confidenceScore}% Certainty
-            </span>
-          </div>
-          <div className="w-16 h-2 bg-zinc-200 rounded-full overflow-hidden">
-            <div
-              className="h-full bg-sky-600 rounded-full"
-              style={{ width: `${diagnostic.confidenceScore}%` }}
-            />
-          </div>
+        <div>
+          <h3 className="text-sm font-bold text-zinc-900 uppercase tracking-wide">
+            AI Diagnostic Summary & RAG Grounding
+          </h3>
         </div>
       </div>
 
