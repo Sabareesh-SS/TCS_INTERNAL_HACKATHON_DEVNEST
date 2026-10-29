@@ -1,4 +1,4 @@
-# TSCAI — Smart Classroom AV Support Platform (Web Dashboard)
+# Smart Classroom AV Support Platform (Web Dashboard)
 
 > **AI-Powered Smart Classroom AV Troubleshooting Assistant**  
 > **Member 2:** React.js Web Dashboard (Administrator Operations & Field Dispatch)
