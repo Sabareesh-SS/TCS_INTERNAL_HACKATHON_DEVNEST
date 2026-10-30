@@ -41,9 +41,16 @@ export const HeaderBar: React.FC<HeaderBarProps> = ({
           </TouchableOpacity>
         ) : null}
 
-        <Text style={[typography.h2, styles.title, { flex: 1 }]} numberOfLines={1}>
-          {title}
-        </Text>
+        <View style={styles.titleColumn}>
+          <Text style={[typography.h2, styles.title]} numberOfLines={1}>
+            {title}
+          </Text>
+          {subtitle ? (
+            <Text style={[typography.bodySmall, styles.subtitle]} numberOfLines={1}>
+              {subtitle}
+            </Text>
+          ) : null}
+        </View>
 
         {badgeText ? (
           <View style={styles.badgeContainer}>
@@ -62,12 +69,6 @@ export const HeaderBar: React.FC<HeaderBarProps> = ({
           </TouchableOpacity>
         ) : null}
       </View>
-
-      {subtitle ? (
-        <Text style={[typography.bodySmall, styles.subtitle]} numberOfLines={1}>
-          {subtitle}
-        </Text>
-      ) : null}
     </View>
   );
 };
@@ -121,6 +122,10 @@ const styles = StyleSheet.create({
   badgeText: {
     fontSize: 10,
     color: colors.textSecondary,
+  },
+  titleColumn: {
+    flex: 1,
+    justifyContent: 'center',
   },
   title: {
     color: colors.textPrimary,
