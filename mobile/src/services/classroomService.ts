@@ -81,7 +81,13 @@ class ClassroomService {
         };
       }
     }
-    const found = this.classrooms.find(c => c.id === id || c.roomNumber.toLowerCase().includes(id.toLowerCase()));
+    const found = this.classrooms.find(
+      c =>
+        c.id.toLowerCase() === id.toLowerCase() ||
+        c.roomNumber.toLowerCase().includes(id.toLowerCase()) ||
+        id.toLowerCase().includes(c.id.toLowerCase()) ||
+        (c.qrCodePayload && c.qrCodePayload.toLowerCase() === id.toLowerCase())
+    );
     return found || null;
   }
 

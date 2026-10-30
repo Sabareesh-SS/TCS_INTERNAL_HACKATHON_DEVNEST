@@ -55,9 +55,11 @@ class DeviceService {
 
     const found = this.devices.find(
       d =>
-        d.id === id ||
+        d.id.toLowerCase() === id.toLowerCase() ||
         d.assetTag.toLowerCase() === id.toLowerCase() ||
-        d.id.toLowerCase().includes(id.toLowerCase())
+        (d.serialNumber && d.serialNumber.toLowerCase() === id.toLowerCase()) ||
+        d.id.toLowerCase().includes(id.toLowerCase()) ||
+        id.toLowerCase().includes(d.id.toLowerCase())
     );
     return found || null;
   }

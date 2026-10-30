@@ -107,7 +107,7 @@ export const QRScannerScreen: React.FC<QRScannerScreenProps> = ({ navigation }) 
         }
       }, 500);
     } else {
-      setScanError(`Unrecognized QR Format: "${payload}". Expected format: classroom:ID or device:ID`);
+      setScanError(result.errorMessage || `Unrecognized QR Format: "${payload}". Expected a classroom or device QR tag.`);
     }
   };
 
