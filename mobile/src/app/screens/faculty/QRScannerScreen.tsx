@@ -137,9 +137,6 @@ export const QRScannerScreen: React.FC<QRScannerScreenProps> = ({ navigation }) 
       <HeaderBar
         title="SCAN QR CODE"
         subtitle="Align QR code within the frame"
-        onBack={navigation.canGoBack() ? () => navigation.goBack() : undefined}
-        rightActionText={torchEnabled ? '[FLASH: ON]' : '[FLASH: OFF]'}
-        onRightAction={() => setTorchEnabled(!torchEnabled)}
       />
 
       <ScrollView contentContainerStyle={styles.content} keyboardShouldPersistTaps="handled">
@@ -186,6 +183,17 @@ export const QRScannerScreen: React.FC<QRScannerScreenProps> = ({ navigation }) 
               pointerEvents="none"
             />
           </View>
+
+          {/* Flashlight Action */}
+          <TouchableOpacity
+            style={styles.flashButton}
+            onPress={() => setTorchEnabled(!torchEnabled)}
+            activeOpacity={0.7}
+          >
+            <Text style={styles.flashButtonText}>
+              {torchEnabled ? 'Flashlight: ON' : 'Flashlight: OFF'}
+            </Text>
+          </TouchableOpacity>
 
           <Text style={[typography.caption, styles.helperText]}>
             Point phone camera at any equipment or classroom QR code
@@ -392,6 +400,20 @@ const styles = StyleSheet.create({
     color: colors.textSecondary,
     marginTop: spacing.sm,
     fontSize: 11,
+  },
+  flashButton: {
+    marginTop: spacing.sm,
+    paddingHorizontal: spacing.md,
+    paddingVertical: spacing.xs,
+    borderWidth: 1,
+    borderColor: colors.borderStrong,
+    borderRadius: borderRadius.xs,
+    backgroundColor: colors.surfaceSubtle,
+  },
+  flashButtonText: {
+    color: colors.textSecondary,
+    fontSize: 11,
+    fontFamily: typography.caption.fontFamily,
   },
   valueCard: {
     backgroundColor: colors.surfaceSubtle,

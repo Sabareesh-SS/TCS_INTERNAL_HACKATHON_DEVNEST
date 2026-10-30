@@ -23,41 +23,44 @@ export const HeaderBar: React.FC<HeaderBarProps> = ({
   badgeText,
 }) => {
   const insets = useSafeAreaInsets();
+  const hasTopRow = Boolean(onBack || badgeText || (rightActionText && onRightAction));
 
   return (
     <View style={[styles.container, { paddingTop: Math.max(insets.top, spacing.sm) + spacing.xs }]}>
-      <View style={styles.topRow}>
-        {onBack ? (
-          <TouchableOpacity
-            activeOpacity={0.7}
-            onPress={onBack}
-            style={styles.backButton}
-            hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
-          >
-            <Text style={[typography.button, styles.backText]}>[BACK]</Text>
-          </TouchableOpacity>
-        ) : (
-          <View style={styles.placeholder} />
-        )}
+      {hasTopRow ? (
+        <View style={styles.topRow}>
+          {onBack ? (
+            <TouchableOpacity
+              activeOpacity={0.7}
+              onPress={onBack}
+              style={styles.backButton}
+              hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+            >
+              <Text style={[typography.button, styles.backText]}>← Back</Text>
+            </TouchableOpacity>
+          ) : (
+            <View style={styles.placeholder} />
+          )}
 
-        {badgeText ? (
-          <View style={styles.badgeContainer}>
-            <Text style={[typography.badge, styles.badgeText]}>[{badgeText.toUpperCase()}]</Text>
-          </View>
-        ) : null}
+          {badgeText ? (
+            <View style={styles.badgeContainer}>
+              <Text style={[typography.badge, styles.badgeText]}>{badgeText.toUpperCase()}</Text>
+            </View>
+          ) : null}
 
-        {rightActionText && onRightAction ? (
-          <TouchableOpacity
-            activeOpacity={0.7}
-            onPress={onRightAction}
-            style={styles.rightAction}
-          >
-            <Text style={[typography.button, styles.rightActionText]}>{rightActionText}</Text>
-          </TouchableOpacity>
-        ) : (
-          <View style={styles.placeholder} />
-        )}
-      </View>
+          {rightActionText && onRightAction ? (
+            <TouchableOpacity
+              activeOpacity={0.7}
+              onPress={onRightAction}
+              style={styles.rightAction}
+            >
+              <Text style={[typography.button, styles.rightActionText]}>{rightActionText}</Text>
+            </TouchableOpacity>
+          ) : (
+            <View style={styles.placeholder} />
+          )}
+        </View>
+      ) : null}
 
       <Text style={[typography.h2, styles.title]} numberOfLines={1}>
         {title}

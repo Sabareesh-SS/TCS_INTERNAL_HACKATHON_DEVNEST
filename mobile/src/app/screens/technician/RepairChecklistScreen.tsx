@@ -57,7 +57,6 @@ export const RepairChecklistScreen: React.FC<RepairChecklistScreenProps> = ({
         title="REPAIR CHECKLIST"
         subtitle={`TICKET: ${ticket.id}`}
         onBack={() => navigation.goBack()}
-        badgeText={`${completedCount}/${totalCount} COMPLETE`}
       />
 
       {/* Progress Metric Box */}

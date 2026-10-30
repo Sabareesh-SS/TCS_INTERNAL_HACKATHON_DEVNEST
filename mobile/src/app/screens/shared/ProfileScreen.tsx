@@ -23,7 +23,6 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = () => {
       <HeaderBar
         title="USER PROFILE"
         subtitle="Institutional Identity & Authorization"
-        badgeText={role || 'USER'}
       />
 
       <ScrollView contentContainerStyle={styles.content}>

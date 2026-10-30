@@ -35,7 +35,6 @@ export const TechnicianHomeScreen: React.FC<TechnicianHomeScreenProps> = ({ navi
       <HeaderBar
         title="TECHNICIAN CONSOLE"
         subtitle={user?.fullName ? `ENGINEER: ${user.fullName.toUpperCase()}` : 'FIELD AV OPS'}
-        badgeText="TECHNICIAN"
       />
 
       <ScrollView contentContainerStyle={styles.content}>

@@ -45,7 +45,6 @@ export const AssignedTicketsScreen: React.FC<AssignedTicketsScreenProps> = ({ na
       <HeaderBar
         title="ASSIGNED REPAIRS"
         subtitle={`TOTAL TICKETS: ${tickets.length}`}
-        badgeText="TECHNICIAN"
       />
 
       {/* Filter Tabs */}

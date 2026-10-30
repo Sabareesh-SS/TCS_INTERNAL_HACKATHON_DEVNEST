@@ -30,7 +30,6 @@ export const ClassroomInventoryScreen: React.FC<ClassroomInventoryScreenProps> =
         title={currentClassroom?.roomNumber || 'CLASSROOM'}
         subtitle={currentClassroom ? `${currentClassroom.building} (${currentClassroom.floor})` : 'CAMPUS FACILITY'}
         onBack={() => navigation.goBack()}
-        badgeText={currentClassroom?.status || 'ACTIVE'}
       />
 
       <FlatList

@@ -25,7 +25,6 @@ export const FacultyHomeScreen: React.FC<FacultyHomeScreenProps> = ({ navigation
       <HeaderBar
         title="FACULTY AV PORTAL"
         subtitle={user?.fullName ? `AUTHORIZED: ${user.fullName.toUpperCase()}` : 'FACULTY CONSOLE'}
-        badgeText="FACULTY"
       />
 
       <ScrollView contentContainerStyle={styles.content}>

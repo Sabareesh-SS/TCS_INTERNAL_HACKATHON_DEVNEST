@@ -33,7 +33,6 @@ export const MyIncidentsScreen: React.FC<MyIncidentsScreenProps> = ({ navigation
       <HeaderBar
         title="MY AV INCIDENTS"
         subtitle={`TOTAL LOGS: ${incidents.length}`}
-        badgeText="FACULTY"
       />
 
       {/* Filter Tabs */}

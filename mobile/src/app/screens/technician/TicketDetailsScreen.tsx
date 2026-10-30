@@ -56,7 +56,6 @@ export const TicketDetailsScreen: React.FC<TicketDetailsScreenProps> = ({
         title={ticket.id}
         subtitle={ticket.incident.classroomName}
         onBack={() => navigation.goBack()}
-        badgeText={ticket.status.toUpperCase()}
       />
 
       <ScrollView contentContainerStyle={styles.content}>
