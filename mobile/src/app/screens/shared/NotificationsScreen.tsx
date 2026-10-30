@@ -19,7 +19,7 @@ export const NotificationsScreen: React.FC<NotificationsScreenProps> = () => {
       <HeaderBar
         title="NOTIFICATIONS"
         subtitle={`${unreadCount} UNREAD SYSTEM NOTIFICATIONS`}
-        rightActionText={unreadCount > 0 ? '[MARK ALL READ]' : undefined}
+        rightActionText={unreadCount > 0 ? 'MARK AS READ' : undefined}
         onRightAction={unreadCount > 0 ? markAllAsRead : undefined}
       />
 

@@ -23,7 +23,7 @@ export const HeaderBar: React.FC<HeaderBarProps> = ({
   badgeText,
 }) => {
   const insets = useSafeAreaInsets();
-  const hasTopRow = Boolean(onBack || badgeText || (rightActionText && onRightAction));
+  const hasTopRow = Boolean(onBack || badgeText);
 
   return (
     <View style={[styles.container, { paddingTop: Math.max(insets.top, spacing.sm) + spacing.xs }]}>
@@ -48,23 +48,26 @@ export const HeaderBar: React.FC<HeaderBarProps> = ({
             </View>
           ) : null}
 
-          {rightActionText && onRightAction ? (
-            <TouchableOpacity
-              activeOpacity={0.7}
-              onPress={onRightAction}
-              style={styles.rightAction}
-            >
-              <Text style={[typography.button, styles.rightActionText]}>{rightActionText}</Text>
-            </TouchableOpacity>
-          ) : (
-            <View style={styles.placeholder} />
-          )}
+          <View style={styles.placeholder} />
         </View>
       ) : null}
 
-      <Text style={[typography.h2, styles.title]} numberOfLines={1}>
-        {title}
-      </Text>
+      <View style={styles.titleRow}>
+        <Text style={[typography.h2, styles.title, { flex: 1 }]} numberOfLines={1}>
+          {title}
+        </Text>
+        {rightActionText && onRightAction ? (
+          <TouchableOpacity
+            activeOpacity={0.7}
+            onPress={onRightAction}
+            style={styles.rightAction}
+            hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
+          >
+            <Text style={[typography.button, styles.rightActionText]}>{rightActionText}</Text>
+          </TouchableOpacity>
+        ) : null}
+      </View>
+
       {subtitle ? (
         <Text style={[typography.bodySmall, styles.subtitle]} numberOfLines={1}>
           {subtitle}
@@ -110,15 +113,22 @@ const styles = StyleSheet.create({
     fontSize: 10,
     color: colors.textSecondary,
   },
-  rightAction: {
-    paddingVertical: spacing.xs,
-  },
-  rightActionText: {
-    color: colors.accent,
-    fontSize: 13,
+  titleRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
   title: {
     color: colors.textPrimary,
+  },
+  rightAction: {
+    paddingVertical: spacing.xs,
+    paddingLeft: spacing.sm,
+  },
+  rightActionText: {
+    color: colors.accent,
+    fontSize: 12,
+    fontWeight: '600',
   },
   subtitle: {
     color: colors.textSecondary,
