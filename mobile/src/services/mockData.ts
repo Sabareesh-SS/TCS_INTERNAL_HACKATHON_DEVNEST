@@ -173,7 +173,7 @@ export const MOCK_DEVICES: Device[] = [
     manufacturer: 'DemoBrand (Promethean)',
     modelNumber: 'DEMO-S02 (ActivPanel 9 Series)',
     assetTag: 'AST-S02',
-    serialNumber: 'QR-DEV-AV-AB105-S02',
+    serialNumber: 'QR-DEV-AV-AB105-S01',
     status: 'operational',
     installDate: '2023-08-20',
     manualUrl: 'https://support.prometheanworld.com/activpanel-9',

@@ -22,9 +22,271 @@ interface QRScannerScreenProps {
   navigation: any;
 }
 
+interface SampleItem {
+  id: string;
+  room: string;
+  type: 'projector' | 'microphone' | 'smart_board' | 'classroom';
+  typeLabel: string;
+  title: string;
+  subtitle: string;
+  payload: string;
+  statusBadge?: string;
+}
+
+const ROOM_FILTERS = ['AB-105', 'AB-204', 'CB-301', 'EB-202', 'LB-110', 'AB-302', 'ALL'];
+
+const SAMPLE_ITEMS: SampleItem[] = [
+  // AB-105 (Academic Block A · Room 105)
+  {
+    id: 'DEV004',
+    room: 'AB-105',
+    type: 'projector',
+    typeLabel: 'PROJECTOR',
+    title: 'Epson PowerLite EB-E01 (Demo DEMO-P02)',
+    subtitle: 'Academic Block A · Room 105',
+    payload: 'QR-DEV-AV-AB105-P01',
+    statusBadge: 'FAULTY',
+  },
+  {
+    id: 'DEV005',
+    room: 'AB-105',
+    type: 'microphone',
+    typeLabel: 'MICROPHONE',
+    title: 'Shure BLX24 / PG58 Wireless Microphone',
+    subtitle: 'Academic Block A · Room 105',
+    payload: 'QR-DEV-AV-AB105-M01',
+    statusBadge: 'ACTIVE',
+  },
+  {
+    id: 'DEV006',
+    room: 'AB-105',
+    type: 'smart_board',
+    typeLabel: 'SMART BOARD',
+    title: 'Promethean ActivPanel 9 Touch Display',
+    subtitle: 'Academic Block A · Room 105',
+    payload: 'QR-DEV-AV-AB105-S01',
+    statusBadge: 'ACTIVE',
+  },
+  {
+    id: 'AB-105',
+    room: 'AB-105',
+    type: 'classroom',
+    typeLabel: 'CLASSROOM',
+    title: 'Academic Block A · Room 105 (Door Tag)',
+    subtitle: 'Floor 1 · Capacity 120 Seats',
+    payload: 'QR-CLS-AB105',
+  },
+
+  // AB-204 (Academic Block A · Room 204)
+  {
+    id: 'DEV001',
+    room: 'AB-204',
+    type: 'projector',
+    typeLabel: 'PROJECTOR',
+    title: 'Epson PowerLite EB-E01 (Demo DEMO-P01)',
+    subtitle: 'Academic Block A · Room 204',
+    payload: 'QR-DEV-AV-AB204-P01',
+    statusBadge: 'ACTIVE',
+  },
+  {
+    id: 'DEV002',
+    room: 'AB-204',
+    type: 'microphone',
+    typeLabel: 'MICROPHONE',
+    title: 'Shure BLX24 / PG58 Wireless Microphone',
+    subtitle: 'Academic Block A · Room 204',
+    payload: 'QR-DEV-AV-AB204-M01',
+    statusBadge: 'ACTIVE',
+  },
+  {
+    id: 'DEV003',
+    room: 'AB-204',
+    type: 'smart_board',
+    typeLabel: 'SMART BOARD',
+    title: 'Promethean ActivPanel 9 Touch Display',
+    subtitle: 'Academic Block A · Room 204',
+    payload: 'QR-DEV-AV-AB204-S01',
+    statusBadge: 'ACTIVE',
+  },
+  {
+    id: 'AB-204',
+    room: 'AB-204',
+    type: 'classroom',
+    typeLabel: 'CLASSROOM',
+    title: 'Academic Block A · Room 204 (Door Tag)',
+    subtitle: 'Floor 2 · Capacity 80 Seats',
+    payload: 'QR-CLS-AB204',
+  },
+
+  // CB-301 (Central Block · Room 301)
+  {
+    id: 'DEV007',
+    room: 'CB-301',
+    type: 'projector',
+    typeLabel: 'PROJECTOR',
+    title: 'Epson PowerLite EB-E01 (Demo DEMO-P03)',
+    subtitle: 'Central Block · Room 301',
+    payload: 'QR-DEV-AV-CB301-P01',
+    statusBadge: 'ACTIVE',
+  },
+  {
+    id: 'DEV008',
+    room: 'CB-301',
+    type: 'microphone',
+    typeLabel: 'MICROPHONE',
+    title: 'Shure BLX24 / PG58 Wireless Microphone',
+    subtitle: 'Central Block · Room 301',
+    payload: 'QR-DEV-AV-CB301-M01',
+    statusBadge: 'FAULTY',
+  },
+  {
+    id: 'DEV009',
+    room: 'CB-301',
+    type: 'smart_board',
+    typeLabel: 'SMART BOARD',
+    title: 'Promethean ActivPanel 9 Touch Display',
+    subtitle: 'Central Block · Room 301',
+    payload: 'QR-DEV-AV-CB301-S01',
+    statusBadge: 'ACTIVE',
+  },
+  {
+    id: 'CB-301',
+    room: 'CB-301',
+    type: 'classroom',
+    typeLabel: 'CLASSROOM',
+    title: 'Central Block · Room 301 (Door Tag)',
+    subtitle: 'Floor 3 · Capacity 60 Seats',
+    payload: 'QR-CLS-CB301',
+  },
+
+  // EB-202 (Engineering Block · Room 202)
+  {
+    id: 'DEV010',
+    room: 'EB-202',
+    type: 'projector',
+    typeLabel: 'PROJECTOR',
+    title: 'Epson PowerLite EB-E01 (Demo DEMO-P04)',
+    subtitle: 'Engineering Block · Room 202',
+    payload: 'QR-DEV-AV-EB202-P01',
+    statusBadge: 'ACTIVE',
+  },
+  {
+    id: 'DEV011',
+    room: 'EB-202',
+    type: 'microphone',
+    typeLabel: 'MICROPHONE',
+    title: 'Shure BLX24 / PG58 Wireless Microphone',
+    subtitle: 'Engineering Block · Room 202',
+    payload: 'QR-DEV-AV-EB202-M01',
+    statusBadge: 'ACTIVE',
+  },
+  {
+    id: 'DEV012',
+    room: 'EB-202',
+    type: 'smart_board',
+    typeLabel: 'SMART BOARD',
+    title: 'Promethean ActivPanel 9 Touch Display',
+    subtitle: 'Engineering Block · Room 202',
+    payload: 'QR-DEV-AV-EB202-S01',
+    statusBadge: 'ACTIVE',
+  },
+  {
+    id: 'EB-202',
+    room: 'EB-202',
+    type: 'classroom',
+    typeLabel: 'CLASSROOM',
+    title: 'Engineering Block · Room 202 (Door Tag)',
+    subtitle: 'Floor 2 · Capacity 90 Seats',
+    payload: 'QR-CLS-EB202',
+  },
+
+  // LB-110 (Library Block · Room 110)
+  {
+    id: 'DEV013',
+    room: 'LB-110',
+    type: 'projector',
+    typeLabel: 'PROJECTOR',
+    title: 'Epson PowerLite EB-E01 (Demo DEMO-P05)',
+    subtitle: 'Library Block · Room 110',
+    payload: 'QR-DEV-AV-LB110-P01',
+    statusBadge: 'ACTIVE',
+  },
+  {
+    id: 'DEV014',
+    room: 'LB-110',
+    type: 'microphone',
+    typeLabel: 'MICROPHONE',
+    title: 'Shure BLX24 / PG58 Wireless Microphone',
+    subtitle: 'Library Block · Room 110',
+    payload: 'QR-DEV-AV-LB110-M01',
+    statusBadge: 'ACTIVE',
+  },
+  {
+    id: 'DEV015',
+    room: 'LB-110',
+    type: 'smart_board',
+    typeLabel: 'SMART BOARD',
+    title: 'Promethean ActivPanel 9 Touch Display',
+    subtitle: 'Library Block · Room 110',
+    payload: 'QR-DEV-AV-LB110-S01',
+    statusBadge: 'ACTIVE',
+  },
+  {
+    id: 'LB-110',
+    room: 'LB-110',
+    type: 'classroom',
+    typeLabel: 'CLASSROOM',
+    title: 'Library Block · Room 110 (Door Tag)',
+    subtitle: 'Floor 1 · Capacity 50 Seats',
+    payload: 'QR-CLS-LB110',
+  },
+
+  // AB-302 (Academic Block A · Room 302)
+  {
+    id: 'DEV016',
+    room: 'AB-302',
+    type: 'projector',
+    typeLabel: 'PROJECTOR',
+    title: 'Epson PowerLite EB-E01 (Demo DEMO-P06)',
+    subtitle: 'Academic Block A · Room 302',
+    payload: 'QR-DEV-AV-AB302-P01',
+    statusBadge: 'ACTIVE',
+  },
+  {
+    id: 'DEV017',
+    room: 'AB-302',
+    type: 'microphone',
+    typeLabel: 'MICROPHONE',
+    title: 'Shure BLX24 / PG58 Wireless Microphone',
+    subtitle: 'Academic Block A · Room 302',
+    payload: 'QR-DEV-AV-AB302-M01',
+    statusBadge: 'ACTIVE',
+  },
+  {
+    id: 'DEV018',
+    room: 'AB-302',
+    type: 'smart_board',
+    typeLabel: 'SMART BOARD',
+    title: 'Promethean ActivPanel 9 Touch Display',
+    subtitle: 'Academic Block A · Room 302',
+    payload: 'QR-DEV-AV-AB302-S01',
+    statusBadge: 'ACTIVE',
+  },
+  {
+    id: 'AB-302',
+    room: 'AB-302',
+    type: 'classroom',
+    typeLabel: 'CLASSROOM',
+    title: 'Academic Block A · Room 302 (Door Tag)',
+    subtitle: 'Floor 3 · Capacity 70 Seats',
+    payload: 'QR-CLS-AB302',
+  },
+];
+
 export const QRScannerScreen: React.FC<QRScannerScreenProps> = ({ navigation }) => {
   const [torchEnabled, setTorchEnabled] = useState(false);
   const [manualCode, setManualCode] = useState('');
+  const [selectedRoom, setSelectedRoom] = useState<string>('AB-105');
   const [scanError, setScanError] = useState<string | null>(null);
   const [hasCameraPermission, setHasCameraPermission] = useState<boolean | null>(null);
   const [lastScannedValue, setLastScannedValue] = useState<string | null>(null);
@@ -225,75 +487,80 @@ export const QRScannerScreen: React.FC<QRScannerScreenProps> = ({ navigation }) 
           <Text style={[typography.caption, styles.sectionTitle]}>
             SAMPLE QR CODES (TAP TO TEST DIRECTLY)
           </Text>
+          <Text style={[typography.caption, styles.sectionSubtitle]}>
+            Select a classroom to test devices available in each room:
+          </Text>
+
+          {/* Classroom Filter Chips */}
+          <ScrollView
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={styles.roomFilterRow}
+          >
+            {ROOM_FILTERS.map(room => {
+              const isSelected = selectedRoom === room;
+              return (
+                <TouchableOpacity
+                  key={room}
+                  style={[styles.roomFilterChip, isSelected && styles.roomFilterChipActive]}
+                  onPress={() => setSelectedRoom(room)}
+                  activeOpacity={0.7}
+                >
+                  <Text
+                    style={[
+                      styles.roomFilterText,
+                      isSelected && styles.roomFilterTextActive,
+                    ]}
+                  >
+                    {room}
+                  </Text>
+                </TouchableOpacity>
+              );
+            })}
+          </ScrollView>
 
           <View style={styles.codeList}>
-            <TouchableOpacity
-              activeOpacity={0.7}
-              onPress={() => processPayload('QR-CLS-AB105')}
-              style={styles.codeCard}
-            >
-              <View style={styles.codeRow}>
-                <Text style={[typography.badge, styles.codeBadge]}>CLASSROOM</Text>
-                <Text style={[typography.code, styles.codeId]}>AB-105</Text>
-              </View>
-              <Text style={[typography.bodyMedium, styles.codeTitle]}>
-                Academic Block A · Room 105
-              </Text>
-              <Text style={[typography.caption, styles.codeSubtitle]}>
-                Raw QR Value: "QR-CLS-AB105"
-              </Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              activeOpacity={0.7}
-              onPress={() => processPayload('QR-DEV-AV-AB105-P01')}
-              style={styles.codeCard}
-            >
-              <View style={styles.codeRow}>
-                <Text style={[typography.badge, styles.codeBadge]}>DEVICE</Text>
-                <Text style={[typography.code, styles.codeId]}>DEV004</Text>
-              </View>
-              <Text style={[typography.bodyMedium, styles.codeTitle]}>
-                Epson PowerLite EB-E01 (Demo DEMO-P02)
-              </Text>
-              <Text style={[typography.caption, styles.codeSubtitle]}>
-                Raw QR Value: "QR-DEV-AV-AB105-P01"
-              </Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              activeOpacity={0.7}
-              onPress={() => processPayload('QR-DEV-AV-AB105-M01')}
-              style={styles.codeCard}
-            >
-              <View style={styles.codeRow}>
-                <Text style={[typography.badge, styles.codeBadge]}>DEVICE</Text>
-                <Text style={[typography.code, styles.codeId]}>DEV005</Text>
-              </View>
-              <Text style={[typography.bodyMedium, styles.codeTitle]}>
-                Shure BLX24 / PG58 Wireless Microphone
-              </Text>
-              <Text style={[typography.caption, styles.codeSubtitle]}>
-                Raw QR Value: "QR-DEV-AV-AB105-M01"
-              </Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              activeOpacity={0.7}
-              onPress={() => processPayload('QR-CLS-AB204')}
-              style={styles.codeCard}
-            >
-              <View style={styles.codeRow}>
-                <Text style={[typography.badge, styles.codeBadge]}>CLASSROOM</Text>
-                <Text style={[typography.code, styles.codeId]}>AB-204</Text>
-              </View>
-              <Text style={[typography.bodyMedium, styles.codeTitle]}>
-                Academic Block A · Room 204
-              </Text>
-              <Text style={[typography.caption, styles.codeSubtitle]}>
-                Raw QR Value: "QR-CLS-AB204"
-              </Text>
-            </TouchableOpacity>
+            {SAMPLE_ITEMS.filter(
+              item => selectedRoom === 'ALL' || item.room === selectedRoom
+            ).map(item => (
+              <TouchableOpacity
+                key={`${item.room}-${item.payload}`}
+                activeOpacity={0.7}
+                onPress={() => processPayload(item.payload)}
+                style={styles.codeCard}
+              >
+                <View style={styles.codeRow}>
+                  <View style={styles.tagGroup}>
+                    <Text style={[typography.badge, styles.codeBadge]}>
+                      {item.typeLabel}
+                    </Text>
+                    <Text style={styles.roomTag}>{item.room}</Text>
+                    {item.statusBadge ? (
+                      <Text
+                        style={[
+                          styles.deviceStatusTag,
+                          item.statusBadge === 'FAULTY'
+                            ? styles.statusFaulty
+                            : styles.statusActive,
+                        ]}
+                      >
+                        {item.statusBadge}
+                      </Text>
+                    ) : null}
+                  </View>
+                  <Text style={[typography.code, styles.codeId]}>{item.id}</Text>
+                </View>
+                <Text style={[typography.bodyMedium, styles.codeTitle]}>
+                  {item.title}
+                </Text>
+                <View style={styles.codeFooterRow}>
+                  <Text style={[typography.caption, styles.codeSubtitle]}>
+                    Raw QR: "{item.payload}"
+                  </Text>
+                  <Text style={styles.tapToTestHint}>TAP TO SCAN →</Text>
+                </View>
+              </TouchableOpacity>
+            ))}
           </View>
         </View>
 
@@ -301,7 +568,7 @@ export const QRScannerScreen: React.FC<QRScannerScreenProps> = ({ navigation }) 
         <View style={styles.manualCard}>
           <Text style={[typography.h4, styles.manualTitle]}>ENTER QR CODE MANUALLY</Text>
           <TextInputField
-            placeholder="e.g. QR-CLS-AB105 or DEV004"
+            placeholder="e.g. QR-CLS-AB105, QR-DEV-AV-AB105-P01, DEV004"
             value={manualCode}
             onChangeText={setManualCode}
             autoCapitalize="none"
@@ -454,7 +721,68 @@ const styles = StyleSheet.create({
   sectionTitle: {
     color: colors.textMuted,
     fontWeight: '700',
+    marginBottom: spacing.xs,
+  },
+  sectionSubtitle: {
+    color: colors.textSecondary,
+    fontSize: 11,
     marginBottom: spacing.sm,
+  },
+  roomFilterRow: {
+    flexDirection: 'row',
+    gap: 6,
+    marginBottom: spacing.md,
+    paddingVertical: 2,
+  },
+  roomFilterChip: {
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderRadius: borderRadius.xs,
+    borderWidth: 1,
+    borderColor: colors.borderStrong,
+    backgroundColor: colors.surfaceSubtle,
+  },
+  roomFilterChipActive: {
+    backgroundColor: 'rgba(56, 189, 248, 0.15)',
+    borderColor: colors.primary,
+  },
+  roomFilterText: {
+    color: colors.textSecondary,
+    fontSize: 11,
+    fontWeight: '600',
+  },
+  roomFilterTextActive: {
+    color: colors.primary,
+    fontWeight: '700',
+  },
+  tagGroup: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+  },
+  roomTag: {
+    fontSize: 9,
+    fontWeight: '700',
+    color: colors.primary,
+    backgroundColor: 'rgba(56, 189, 248, 0.1)',
+    paddingHorizontal: 5,
+    paddingVertical: 1,
+    borderRadius: 3,
+  },
+  deviceStatusTag: {
+    fontSize: 8,
+    fontWeight: '700',
+    paddingHorizontal: 4,
+    paddingVertical: 1,
+    borderRadius: 3,
+  },
+  statusFaulty: {
+    color: '#EF4444',
+    backgroundColor: 'rgba(239, 68, 68, 0.1)',
+  },
+  statusActive: {
+    color: '#10B981',
+    backgroundColor: 'rgba(16, 185, 129, 0.1)',
   },
   codeList: {
     gap: spacing.sm,
@@ -489,6 +817,18 @@ const styles = StyleSheet.create({
   codeSubtitle: {
     color: colors.textSecondary,
     fontSize: 10,
+  },
+  codeFooterRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginTop: 4,
+  },
+  tapToTestHint: {
+    color: colors.primary,
+    fontSize: 9,
+    fontWeight: '700',
+    letterSpacing: 0.5,
   },
   manualCard: {
     backgroundColor: colors.card,

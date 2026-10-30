@@ -17,8 +17,8 @@ class ClassroomService {
             id: c.classroom_id || c.id,
             roomNumber: c.room_no || c.room_number,
             building: c.block || c.building || 'Campus Block',
-            floor: c.floor || 1,
-            status: 'operational',
+            floor: String(c.floor || 'Floor 1'),
+            status: 'active',
             qrCodePayload: c.classroom_qr_id || c.qr_code_payload || c.classroom_id,
             capacity: c.capacity || 60,
           }));
@@ -56,8 +56,8 @@ class ClassroomService {
             id: cls.classroom_id || cls.id,
             roomNumber: cls.room_no || cls.room_number,
             building: cls.block || cls.building || 'Campus Block',
-            floor: cls.floor || 1,
-            status: 'operational',
+            floor: String(cls.floor || 'Floor 1'),
+            status: 'active',
             qrCodePayload: cls.classroom_qr_id || cls.qr_code_payload || id,
             capacity: cls.capacity || 60,
           };
@@ -135,7 +135,20 @@ class ClassroomService {
         }));
       }
     }
-    return MOCK_DEVICES.filter(d => d.classroomId === classroomId);
+    const foundCls = this.classrooms.find(
+      c =>
+        c.id.toLowerCase() === classroomId.toLowerCase() ||
+        c.roomNumber.toLowerCase() === classroomId.toLowerCase() ||
+        (c.qrCodePayload && c.qrCodePayload.toLowerCase() === classroomId.toLowerCase()) ||
+        c.roomNumber.toLowerCase().includes(classroomId.toLowerCase()) ||
+        classroomId.toLowerCase().includes(c.roomNumber.toLowerCase())
+    );
+    const targetRoomId = foundCls ? foundCls.id : classroomId;
+    return MOCK_DEVICES.filter(
+      d =>
+        d.classroomId.toLowerCase() === targetRoomId.toLowerCase() ||
+        d.classroomId.toLowerCase() === classroomId.toLowerCase()
+    );
   }
 }
 

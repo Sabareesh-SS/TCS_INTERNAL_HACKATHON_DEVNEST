@@ -115,7 +115,7 @@ class DiagnosticService {
             totalSteps: 3,
             actionTitle,
             instructionText,
-            manualReference: manualRef,
+            manualReference: manualRef || 'Campus AV Standard Operating Procedures (SOP)',
             verificationPrompt: data.expected_result || 'Did this procedure resolve the problem?',
           },
           status: data.status,
