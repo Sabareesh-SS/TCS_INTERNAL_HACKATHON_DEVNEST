@@ -23,39 +23,31 @@ export const HeaderBar: React.FC<HeaderBarProps> = ({
   badgeText,
 }) => {
   const insets = useSafeAreaInsets();
-  const hasTopRow = Boolean(onBack || badgeText);
 
   return (
     <View style={[styles.container, { paddingTop: Math.max(insets.top, spacing.sm) + spacing.xs }]}>
-      {hasTopRow ? (
-        <View style={styles.topRow}>
-          {onBack ? (
-            <TouchableOpacity
-              activeOpacity={0.7}
-              onPress={onBack}
-              style={styles.backButton}
-              hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
-            >
-              <Text style={[typography.button, styles.backText]}>← Back</Text>
-            </TouchableOpacity>
-          ) : (
-            <View style={styles.placeholder} />
-          )}
-
-          {badgeText ? (
-            <View style={styles.badgeContainer}>
-              <Text style={[typography.badge, styles.badgeText]}>{badgeText.toUpperCase()}</Text>
-            </View>
-          ) : null}
-
-          <View style={styles.placeholder} />
-        </View>
-      ) : null}
-
       <View style={styles.titleRow}>
+        {onBack ? (
+          <TouchableOpacity
+            activeOpacity={0.7}
+            onPress={onBack}
+            style={styles.backButton}
+            hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
+          >
+            <Text style={[typography.button, styles.backText]}>← Back</Text>
+          </TouchableOpacity>
+        ) : null}
+
         <Text style={[typography.h2, styles.title, { flex: 1 }]} numberOfLines={1}>
           {title}
         </Text>
+
+        {badgeText ? (
+          <View style={styles.badgeContainer}>
+            <Text style={[typography.badge, styles.badgeText]}>{badgeText.toUpperCase()}</Text>
+          </View>
+        ) : null}
+
         {rightActionText && onRightAction ? (
           <TouchableOpacity
             activeOpacity={0.7}
@@ -86,21 +78,20 @@ const styles = StyleSheet.create({
     paddingTop: spacing.md,
     paddingBottom: spacing.md,
   },
-  topRow: {
+  titleRow: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: spacing.xs,
+    justifyContent: 'space-between',
   },
   backButton: {
     paddingVertical: spacing.xs,
+    paddingRight: spacing.sm,
+    justifyContent: 'center',
   },
   backText: {
     color: colors.textSecondary,
-    fontSize: 12,
-  },
-  placeholder: {
-    width: 40,
+    fontSize: 13,
+    fontWeight: '600',
   },
   badgeContainer: {
     paddingHorizontal: spacing.sm,
@@ -108,15 +99,11 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: colors.borderStrong,
     borderRadius: 2,
+    marginLeft: spacing.xs,
   },
   badgeText: {
     fontSize: 10,
     color: colors.textSecondary,
-  },
-  titleRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
   },
   title: {
     color: colors.textPrimary,
