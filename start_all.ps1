@@ -11,6 +11,13 @@ $backendProcess = Start-Process -FilePath "powershell.exe" -ArgumentList "-NoExi
 Write-Host "[2/3] Launching React Web Dashboard (Vite :5173)..." -ForegroundColor Green
 $webProcess = Start-Process -FilePath "powershell.exe" -ArgumentList "-NoExit", "-Command", "cd web; npm run dev" -PassThru
 
+# 3. Configure Android USB Reverse Port Forwarding (if device connected)
+if (Get-Command adb -ErrorAction SilentlyContinue) {
+    Write-Host "[3/3] Configuring Android USB port forward (8081 Metro, 8000 AI Engine)..." -ForegroundColor Green
+    adb reverse tcp:8081 tcp:8081 2>$null
+    adb reverse tcp:8000 tcp:8000 2>$null
+}
+
 Write-Host "`nAll background services launched successfully!" -ForegroundColor Cyan
 Write-Host "  - AI Engine API & Swagger Docs : http://localhost:8000/docs" -ForegroundColor Yellow
 Write-Host "  - React Web Admin Dashboard    : http://localhost:5173/" -ForegroundColor Yellow
