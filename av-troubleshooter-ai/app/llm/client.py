@@ -77,7 +77,6 @@ class LLMDiagnosticService:
             config=types.GenerateContentConfig(
                 system_instruction=DIAGNOSTIC_SYSTEM_PROMPT,
                 response_mime_type="application/json",
-                response_schema=DiagnosticResponse,
                 temperature=0.1  # Low temperature for deterministic, factual adherence
             )
         )
