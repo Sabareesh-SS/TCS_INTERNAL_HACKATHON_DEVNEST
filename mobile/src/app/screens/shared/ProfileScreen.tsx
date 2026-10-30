@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Alert } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Alert } from 'react-native';
 import { colors } from '../../../theme/colors';
 import { typography } from '../../../theme/typography';
 import { borderRadius, spacing } from '../../../theme/spacing';
@@ -12,7 +12,7 @@ interface ProfileScreenProps {
 }
 
 export const ProfileScreen: React.FC<ProfileScreenProps> = () => {
-  const { user, role, logout, switchRole } = useAuth();
+  const { user, role, logout } = useAuth();
 
   const handleLogout = () => {
     logout();
@@ -54,52 +54,6 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = () => {
           <View style={styles.detailRow}>
             <Text style={[typography.caption, styles.detailLabel]}>PHONE CONTACT</Text>
             <Text style={[typography.bodySmall, styles.detailValue]}>{user?.phone || 'N/A'}</Text>
-          </View>
-        </View>
-
-        {/* Prototype Role Switcher Card for Seamless Evaluation */}
-        <View style={styles.switchCard}>
-          <Text style={[typography.h4, styles.switchTitle]}>EVALUATION ROLE OVERRIDE</Text>
-          <Text style={[typography.bodySmall, styles.switchDesc]}>
-            Toggle between Faculty and Technician stacks instantly to evaluate role-specific screens and permissions.
-          </Text>
-
-          <View style={styles.buttonRow}>
-            <TouchableOpacity
-              activeOpacity={0.7}
-              onPress={() => switchRole('faculty')}
-              style={[
-                styles.roleBtn,
-                role === 'faculty' && styles.roleBtnActive,
-              ]}
-            >
-              <Text
-                style={[
-                  typography.button,
-                  role === 'faculty' ? styles.roleTextActive : styles.roleTextInactive,
-                ]}
-              >
-                [FACULTY ROLE]
-              </Text>
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              activeOpacity={0.7}
-              onPress={() => switchRole('technician')}
-              style={[
-                styles.roleBtn,
-                role === 'technician' && styles.roleBtnActive,
-              ]}
-            >
-              <Text
-                style={[
-                  typography.button,
-                  role === 'technician' ? styles.roleTextActive : styles.roleTextInactive,
-                ]}
-              >
-                [TECHNICIAN ROLE]
-              </Text>
-            </TouchableOpacity>
           </View>
         </View>
 
@@ -170,47 +124,6 @@ const styles = StyleSheet.create({
   },
   detailValue: {
     color: colors.textPrimary,
-  },
-  switchCard: {
-    backgroundColor: colors.surfaceSubtle,
-    borderWidth: 1,
-    borderColor: colors.borderDark,
-    borderRadius: borderRadius.md,
-    padding: spacing.lg,
-    marginBottom: spacing.lg,
-  },
-  switchTitle: {
-    color: colors.textPrimary,
-    marginBottom: 4,
-  },
-  switchDesc: {
-    color: colors.textSecondary,
-    marginBottom: spacing.md,
-  },
-  buttonRow: {
-    flexDirection: 'row',
-    gap: spacing.sm,
-  },
-  roleBtn: {
-    flex: 1,
-    borderWidth: 1,
-    borderColor: colors.border,
-    borderRadius: borderRadius.xs,
-    paddingVertical: spacing.sm,
-    alignItems: 'center',
-    backgroundColor: colors.card,
-  },
-  roleBtnActive: {
-    backgroundColor: colors.primary,
-    borderColor: colors.primary,
-  },
-  roleTextActive: {
-    color: colors.textInverse,
-    fontSize: 12,
-  },
-  roleTextInactive: {
-    color: colors.textPrimary,
-    fontSize: 12,
   },
   logoutBtn: {
     marginBottom: spacing.xxl,
