@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Alert, Platform } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Alert } from 'react-native';
 import { colors } from '../../../theme/colors';
 import { typography } from '../../../theme/typography';
 import { borderRadius, spacing } from '../../../theme/spacing';
@@ -101,20 +101,6 @@ export const ProfileScreen: React.FC<ProfileScreenProps> = () => {
               </Text>
             </TouchableOpacity>
           </View>
-        </View>
-
-        {/* System Diagnostics Info */}
-        <View style={styles.sysCard}>
-          <Text style={[typography.caption, styles.sysTitle]}>SYSTEM & COMPLIANCE</Text>
-          <Text style={[typography.caption, styles.sysItem]}>
-            BACKEND: Supabase Auth & Realtime Engine
-          </Text>
-          <Text style={[typography.caption, styles.sysItem]}>
-            ACCESS CONTROL: Row Level Security (RLS) Enforced
-          </Text>
-          <Text style={[typography.caption, styles.sysItem]}>
-            CLIENT STANDARD: Minimalist Zero-Emoji Specification
-          </Text>
         </View>
 
         <Button
@@ -225,25 +211,6 @@ const styles = StyleSheet.create({
   roleTextInactive: {
     color: colors.textPrimary,
     fontSize: 12,
-  },
-  sysCard: {
-    backgroundColor: colors.card,
-    borderWidth: 1,
-    borderColor: colors.border,
-    borderRadius: borderRadius.md,
-    padding: spacing.md,
-    marginBottom: spacing.lg,
-  },
-  sysTitle: {
-    color: colors.textMuted,
-    fontWeight: '700',
-    marginBottom: spacing.xs,
-  },
-  sysItem: {
-    color: colors.textSecondary,
-    marginTop: 2,
-    fontFamily: Platform.OS === 'ios' ? 'Menlo' : 'monospace',
-    fontSize: 10,
   },
   logoutBtn: {
     marginBottom: spacing.xxl,
