@@ -29,12 +29,15 @@ export const HeaderBar: React.FC<HeaderBarProps> = ({
       <View style={styles.titleRow}>
         {onBack ? (
           <TouchableOpacity
-            activeOpacity={0.7}
+            activeOpacity={0.6}
             onPress={onBack}
             style={styles.backButton}
             hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
+            accessibilityLabel="Back"
           >
-            <Text style={[typography.button, styles.backText]}>← Back</Text>
+            <View style={styles.backIconCircle}>
+              <View style={styles.backChevron} />
+            </View>
           </TouchableOpacity>
         ) : null}
 
@@ -84,14 +87,28 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   backButton: {
-    paddingVertical: spacing.xs,
-    paddingRight: spacing.sm,
+    marginRight: spacing.sm,
     justifyContent: 'center',
+    alignItems: 'center',
   },
-  backText: {
-    color: colors.textSecondary,
-    fontSize: 13,
-    fontWeight: '600',
+  backIconCircle: {
+    width: 36,
+    height: 36,
+    borderRadius: 18,
+    backgroundColor: colors.surfaceSubtle,
+    borderWidth: 1,
+    borderColor: colors.borderStrong,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  backChevron: {
+    width: 10,
+    height: 10,
+    borderLeftWidth: 2.8,
+    borderBottomWidth: 2.8,
+    borderColor: colors.textPrimary,
+    transform: [{ rotate: '45deg' }],
+    marginLeft: 3,
   },
   badgeContainer: {
     paddingHorizontal: spacing.sm,
