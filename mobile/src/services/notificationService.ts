@@ -11,19 +11,11 @@ class NotificationService {
   private notifications: AppNotification[] = [
     {
       id: 'notif-1',
-      title: 'Ticket Assigned: Room 402 Projector',
-      message: 'New critical AV incident escalated from faculty in Room 402 (Ramanujan Block). Pre-diagnostic evidence attached.',
+      title: 'Ticket Assigned: Room 105 Projector',
+      message: 'New critical AV incident escalated from faculty in Room 105 (Academic Block A). Pre-diagnostic evidence attached.',
       type: 'assignment',
       isRead: false,
       createdAt: '2026-10-29T09:21:00Z',
-    },
-    {
-      id: 'notif-2',
-      title: 'Firmware Update Scheduled',
-      message: 'Scheduled maintenance for Extron PoleVault switchers on Floor 2 completed successfully.',
-      type: 'system',
-      isRead: true,
-      createdAt: '2026-10-28T18:00:00Z',
     },
   ];
 
